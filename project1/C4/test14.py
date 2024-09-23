@@ -1,5 +1,5 @@
 def binary_search(array, element, left, right):
-    if left > right or left >= len(array):  # если левая граница превысила превысила правую или длину массива,
+    if left > right or left >= len(array):  # если левая граница превысила правую или длину массива,
         return False  # значит, элемент отсутствует
 
     middle = (right + left) // 2  # находим середину
