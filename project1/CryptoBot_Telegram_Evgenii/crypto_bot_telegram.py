@@ -1,55 +1,9 @@
-import json
 import telebot
-import requests
-
-
-TOKEN = '7727321887:AAFm9uihnjVWyqnpABIu4EKmKxOwF_oqWkE'
+from extensions import ConvertionException, CryptoConverter
+from config import keys, TOKEN, commands_list
 
 
 bot = telebot.TeleBot(TOKEN)
-
-keys = {
-    'TON': 'TON',
-    'NOT': 'NOT',
-    'RUB': 'RUB',
-    'BTC': 'BTC',
-    'USD': 'USD',
-    'тонкоин': 'TON',
-    'рубль': 'RUB',
-    'доллар': 'USD',
-    'биткоин': 'BTC'
-}
-
-
-class ConvertionException(Exception):
-    pass
-
-
-class CryptoConverter:
-    @staticmethod
-    def converter(quote: str, base: str, amount: str):
-        if quote == base:
-            raise ConvertionException(f'Невозможно конвертировать {quote} в {base}')
-
-        try:
-            quote_ticker = keys[quote]
-        except KeyError:
-            raise ConvertionException(f'Не удалось конвертировать валюту {quote}')
-
-        try:
-            base_ticker = keys[base]
-        except KeyError:
-            raise ConvertionException(f'Не удалось конвертировать валюту {base}')
-
-        try:
-            amount = float(amount)
-        except ValueError:
-            raise ConvertionException(f'Не удалось конвертировать количество {amount}')
-
-        r = requests.get(f'https://min-api.cryptocompare.com/data/price?fsym={quote_ticker}&tsyms={base_ticker}')
-        total_base = json.loads(r.content)[keys[base]]
-
-        return total_base
 
 
 # @bot.message_handler()
@@ -59,9 +13,10 @@ class CryptoConverter:
 
 @bot.message_handler(commands=['start', 'help'])
 def command_help(message: telebot.types.Message):
-    text = ('Для начала работы с ботом введите команду формата: <имя валюты> <в какую валюту перевести> <количество>\n'
-            'Например: доллар тонкоин 100\n'
-            'Увидеть список доступных валют: /values')
+    text = ('Для начала работы с ботом введите команду формата:\n <имя валюты> <в какую валюту перевести> <количество>'
+            '\nНапример: USD TON 100\n'
+            'Использовать только аббревиатуры.\n'
+            'Узнать список доступных валют: /values')
     bot.reply_to(message, text)
 
 
@@ -75,19 +30,32 @@ def values(message: telebot.types.Message):
 
 @bot.message_handler(content_types=['text', ])
 def convert(message: telebot.types.Message):
-    count_values = message.text.split(' ')
+    try:
+        start_values = message.text
+        if start_values.startswith('/'):
+            if start_values not in commands_list:
+                available_commands = [str(command) for command in commands_list]
+                raise ConvertionException(f'Команда {start_values} недоступна.\n'
+                                          f'Список доступных команд: {', '.join(available_commands)}')
+        count_values = message.text.split(' ')
 
-    if len(count_values) != 3:
-        raise ConvertionException('Требуются ровно 3 параметра')
+        if len(count_values) != 3:
+            raise ConvertionException(f'Некорректное кол-во параметров (требуются 3). У вас их {len(count_values)}.')
 
-    quote, base, amount = count_values
-    total_base = CryptoConverter.converter(quote, base, amount)
-    if quote == 'RUB' or 'рубль':
-        text = f'Цена {amount} {quote} в {base} равна {float(total_base) * float(amount)} {base}'
-        bot.send_message(message.chat.id, text)
+        quote, base, amount = count_values
+        total_base = CryptoConverter.converter(quote, base, amount)
+    except ConvertionException as e:
+        bot.reply_to(message, f'Ошибка пользователя.\n{e}')
+    except Exception as e:
+        bot.reply_to(message, f'Не удалось обработать команду.\n{e}')
     else:
-        text = f'Цена {amount} {quote} в {base} равна {total_base} {base}'
-        bot.send_message(message.chat.id, text)
+        if quote == 'RUB' or 'рубль':
+
+            text = f'Цена {amount} {str(quote).upper()} в {str(base).upper()} равна {(float(total_base) * float(amount))} {str(base).upper()}'
+            bot.send_message(message.chat.id, text)
+        else:
+            text = f'Цена {amount} {str(quote).upper()} в {str(base).upper()} равна {total_base} {str(base).upper()}'
+            bot.send_message(message.chat.id, text)
 
 
 bot.polling()
