@@ -20,6 +20,38 @@ keys = {
     'биткоин': 'BTC'
 }
 
+
+class ConvertionException(Exception):
+    pass
+
+
+class CryptoConverter:
+    @staticmethod
+    def converter(quote: str, base: str, amount: str):
+        if quote == base:
+            raise ConvertionException(f'Невозможно конвертировать {quote} в {base}')
+
+        try:
+            quote_ticker = keys[quote]
+        except KeyError:
+            raise ConvertionException(f'Не удалось конвертировать валюту {quote}')
+
+        try:
+            base_ticker = keys[base]
+        except KeyError:
+            raise ConvertionException(f'Не удалось конвертировать валюту {base}')
+
+        try:
+            amount = float(amount)
+        except ValueError:
+            raise ConvertionException(f'Не удалось конвертировать количество {amount}')
+
+        r = requests.get(f'https://min-api.cryptocompare.com/data/price?fsym={quote_ticker}&tsyms={base_ticker}')
+        total_base = json.loads(r.content)[keys[base]]
+
+        return total_base
+
+
 # @bot.message_handler()
 # def test(message: telebot.types.Message):
 #     bot.send_message(message.chat.id, 'Привет. Команды /start или /help для справки по использованию бота')
@@ -43,9 +75,13 @@ def values(message: telebot.types.Message):
 
 @bot.message_handler(content_types=['text', ])
 def convert(message: telebot.types.Message):
-    quote, base, amount = message.text.split(' ')
-    r = requests.get(f'https://min-api.cryptocompare.com/data/price?fsym={keys[quote]}&tsyms={keys[base]}')
-    total_base = json.loads(r.content)[keys[base]]
+    count_values = message.text.split(' ')
+
+    if len(count_values) != 3:
+        raise ConvertionException('Требуются ровно 3 параметра')
+
+    quote, base, amount = count_values
+    total_base = CryptoConverter.converter(quote, base, amount)
     if quote == 'RUB' or 'рубль':
         text = f'Цена {amount} {quote} в {base} равна {float(total_base) * float(amount)} {base}'
         bot.send_message(message.chat.id, text)
