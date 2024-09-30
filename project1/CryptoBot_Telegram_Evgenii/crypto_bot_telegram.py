@@ -1,4 +1,6 @@
 import telebot
+from telebot.types import Update
+
 from extensions import ConvertionException, CryptoConverter
 from config import keys, TOKEN, commands_list
 
@@ -10,8 +12,15 @@ bot = telebot.TeleBot(TOKEN)
 # def test(message: telebot.types.Message):
 #     bot.send_message(message.chat.id, 'Привет. Команды /start или /help для справки по использованию бота')
 
+@bot.message_handler(commands=['start'])
+def command_start(message: telebot.types.Message):
+    text = ('Бот "CryptoBot_Evgenii" помогает конвертировать валюты.\n'
+            'Помощь по руководству доступна командой: /help\n'
+            'Список доступных валют: /values')
+    bot.reply_to(message, text)
 
-@bot.message_handler(commands=['start', 'help'])
+
+@bot.message_handler(commands=['help'])
 def command_help(message: telebot.types.Message):
     text = ('Для начала работы с ботом введите команду формата:\n <имя валюты> <в какую валюту перевести> <количество>'
             '\nНапример: USD TON 100\n'
