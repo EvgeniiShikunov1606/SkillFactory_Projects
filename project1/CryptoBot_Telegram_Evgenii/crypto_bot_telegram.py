@@ -8,9 +8,10 @@ from config import keys, TOKEN, commands_list
 bot = telebot.TeleBot(TOKEN)
 
 
-# @bot.message_handler()
-# def test(message: telebot.types.Message):
-#     bot.send_message(message.chat.id, 'Привет. Команды /start или /help для справки по использованию бота')
+@bot.message_handler()
+def test(message: telebot.types.Message):
+    bot.send_message(message.chat.id, 'Доброго времени суток! Введите команду /start для начала работы с ботом.')
+
 
 @bot.message_handler(commands=['start'])
 def command_start(message: telebot.types.Message):
