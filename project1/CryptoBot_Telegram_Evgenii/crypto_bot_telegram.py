@@ -1,16 +1,9 @@
 import telebot
-from telebot.types import Update
-
 from extensions import ConvertionException, CryptoConverter
 from config import keys, TOKEN, commands_list
 
 
 bot = telebot.TeleBot(TOKEN)
-
-
-@bot.message_handler()
-def test(message: telebot.types.Message):
-    bot.send_message(message.chat.id, 'Доброго времени суток! Введите команду /start для начала работы с ботом.')
 
 
 @bot.message_handler(commands=['start'])
@@ -59,7 +52,7 @@ def convert(message: telebot.types.Message):
     except Exception as e:
         bot.reply_to(message, f'Не удалось обработать команду.\n{e}')
     else:
-        if quote == 'RUB' or 'рубль':
+        if quote == 'RUB':
 
             text = f'Цена {amount} {str(quote).upper()} в {str(base).upper()} равна {(float(total_base) * float(amount))} {str(base).upper()}'
             bot.send_message(message.chat.id, text)
