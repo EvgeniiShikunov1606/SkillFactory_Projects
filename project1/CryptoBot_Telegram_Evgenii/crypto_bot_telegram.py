@@ -1,5 +1,7 @@
+import random
+
 import telebot
-from extensions import ConvertionException, CryptoConverter
+from extensions import APIException, CryptoConverter
 from config import keys, TOKEN, commands_list
 
 
@@ -16,8 +18,9 @@ def command_start(message: telebot.types.Message):
 
 @bot.message_handler(commands=['help'])
 def command_help(message: telebot.types.Message):
+    value_1, value_2 = random.sample(list(keys.keys()), 2)
     text = ('Для начала работы с ботом введите команду формата:\n <имя валюты> <в какую валюту перевести> <количество>'
-            '\nНапример: USD TON 100\n'
+            f'\nНапример: {value_1} {value_2} {random.randint(1, 100)}\n'
             'Использовать только аббревиатуры.\n'
             'Узнать список доступных валют: /values\n'
             'Список доступных команд: /com')
@@ -47,17 +50,19 @@ def convert(message: telebot.types.Message):
         if start_values.startswith('/'):
             if start_values not in commands_list:
                 available_commands = [str(command) for command in commands_list]
-                raise ConvertionException(f'Команда {start_values} недоступна.\n'
+                raise APIException(f'Команда {start_values} недоступна.\n'
                                           f'Список доступных команд: {', '.join(available_commands)}')
         count_values = message.text.split()
         if ' ' in count_values:
             count_values = [value for value in count_values.split() if value.strip()]
-        elif len(count_values) != 3:
-            raise ConvertionException(f'Некорректное кол-во параметров (требуются 3). У вас их {len(count_values)}')
+        elif len(count_values) > 3:
+            count_values = count_values[:3]
+        elif len(count_values) < 3:
+            raise APIException(f'Некорректное кол-во параметров (требуются 3). У вас их {len(count_values)}')
 
         quote, base, amount = count_values
-        total_base = CryptoConverter.converter(quote, base, amount)
-    except ConvertionException as e:
+        total_base = CryptoConverter.get_price(quote, base, amount)
+    except APIException as e:
         bot.reply_to(message, f'Ошибка пользователя.\n{e}')
     except Exception as e:
         bot.reply_to(message, f'Не удалось обработать команду.\n{e}')
