@@ -61,15 +61,9 @@ def convert(message: telebot.types.Message):
     except Exception as e:
         bot.reply_to(message, f'Не удалось обработать команду.\n{e}')
     else:
-        if quote == 'RUB':
-
-            text = (f'Цена {amount} {str(quote).upper()} в {str(base).upper()} '
-                    f'равна {(float(total_base) * float(amount))} {str(base).upper()}')
-            bot.send_message(message.chat.id, text)
-        else:
-            text = (f'Цена {amount} {str(quote).upper()} в {str(base).upper()} '
-                    f'равна {total_base} {str(base).upper()}')
-            bot.send_message(message.chat.id, text)
+        text = (f'Цена {amount} {str(quote).upper()} в {str(base).upper()} '
+                f'равна {float(total_base) * float(amount)} {str(base).upper()}')
+        bot.send_message(message.chat.id, text)
 
 
 bot.polling()

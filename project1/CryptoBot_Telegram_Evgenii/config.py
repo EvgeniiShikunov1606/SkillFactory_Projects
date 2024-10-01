@@ -4,6 +4,11 @@ keys = {
     'NOT': 'NOT',
     'RUB': 'RUB',
     'BTC': 'BTC',
-    'USD': 'USD'
+    'USD': 'USD',
+    'EUR': 'EUR',
+    'ETH': 'ETH',
+    'SOL': 'SOL',
+    'HMSTR': 'HMSTR',
+    'TRY': 'TRY'
 }
 commands_list = ['/start', '/help', '/values', '/com']
