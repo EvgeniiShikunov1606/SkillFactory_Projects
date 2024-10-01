@@ -53,9 +53,7 @@ def convert(message: telebot.types.Message):
                 raise APIException(f'Команда {start_values} недоступна.\n'
                                           f'Список доступных команд: {', '.join(available_commands)}')
         count_values = message.text.split()
-        if ' ' in count_values:
-            count_values = [value for value in count_values.split() if value.strip()]
-        elif len(count_values) > 3:
+        if len(count_values) > 3:
             count_values = count_values[:3]
         elif len(count_values) < 3:
             raise APIException(f'Некорректное кол-во параметров (требуются 3). У вас их {len(count_values)}')
