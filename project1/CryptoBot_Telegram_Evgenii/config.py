@@ -6,4 +6,4 @@ keys = {
     'BTC': 'BTC',
     'USD': 'USD'
 }
-commands_list = ['/start', '/help', '/values']
+commands_list = ['/start', '/help', '/values', '/com']

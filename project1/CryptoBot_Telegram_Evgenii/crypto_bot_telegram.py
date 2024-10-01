@@ -19,7 +19,8 @@ def command_help(message: telebot.types.Message):
     text = ('Для начала работы с ботом введите команду формата:\n <имя валюты> <в какую валюту перевести> <количество>'
             '\nНапример: USD TON 100\n'
             'Использовать только аббревиатуры.\n'
-            'Узнать список доступных валют: /values')
+            'Узнать список доступных валют: /values\n'
+            'Список доступных команд: /com')
     bot.reply_to(message, text)
 
 
@@ -28,6 +29,14 @@ def values(message: telebot.types.Message):
     text = 'Доступные валюты:'
     for key in keys.keys():
         text = '\n'.join((text, key))
+    bot.reply_to(message, text)
+
+
+@bot.message_handler(commands=['com'])
+def com(message: telebot.types.Message):
+    text = 'Доступные команды:'
+    for i in commands_list:
+        text = '\n'.join((text, i))
     bot.reply_to(message, text)
 
 
@@ -54,10 +63,12 @@ def convert(message: telebot.types.Message):
     else:
         if quote == 'RUB':
 
-            text = f'Цена {amount} {str(quote).upper()} в {str(base).upper()} равна {(float(total_base) * float(amount))} {str(base).upper()}'
+            text = (f'Цена {amount} {str(quote).upper()} в {str(base).upper()} '
+                    f'равна {(float(total_base) * float(amount))} {str(base).upper()}')
             bot.send_message(message.chat.id, text)
         else:
-            text = f'Цена {amount} {str(quote).upper()} в {str(base).upper()} равна {total_base} {str(base).upper()}'
+            text = (f'Цена {amount} {str(quote).upper()} в {str(base).upper()} '
+                    f'равна {total_base} {str(base).upper()}')
             bot.send_message(message.chat.id, text)
 
 
