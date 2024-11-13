@@ -56,9 +56,9 @@ node_6 = node_7.right_child.insert_left(5).insert_right(11)
 node_5 = node_root.right_child.insert_right(9)
 node_9 = node_5.right_child.insert_left(4)
 
-
+print('pre-order')
 node_root.pre_order()
-print('')
+print('\npost-order')
 node_root.post_order()
-print('')
+print('\nin-order')
 node_root.in_order()
