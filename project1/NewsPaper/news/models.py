@@ -42,8 +42,8 @@ class Post(models.Model):
     # category = models.ForeignKey(to='Category', on_delete=models.CASCADE,related_name='name')
     #  price = models.FloatField(validators=[MinValueValidator(0.0)])
 
-    # def __str__(self):
-     #   return f'{self.title}: {self.description[:20]}'
+    def __str__(self):
+        return f'{self.title}'
 
     def like(self):
         self.rating += 1
