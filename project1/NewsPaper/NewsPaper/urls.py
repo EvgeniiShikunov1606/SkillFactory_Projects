@@ -21,5 +21,7 @@ from django.views.generic import TemplateView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('pages/', include('django.contrib.flatpages.urls')),
-    path('', TemplateView.as_view(template_name='home.html'), name='home'),  # Добавлен маршрут для корня
+    # path('posts/', include('django.contrib.flatpages.urls')),
+    path('', TemplateView.as_view(template_name='home.html'), name='home'),
+    path('posts/', TemplateView.as_view(template_name='posts.html'), name='posts'),
 ]
