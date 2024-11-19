@@ -1,0 +1,19 @@
+<--  наследуемся от шаблона default.html, который мы создавали для flatpages -->
+{% extends 'flatpages/default.html' %}
+
+<!-- Название у нас будет products -->
+{% block title %}
+Posts
+{% endblock title %}
+
+<!-- В контенте на странице мы выводим все товары -->
+{% block content %}
+   <h1>Все посты</h1>
+   <!-- Выводим товары, только если они есть с помощью тега if -->
+   {% if posts %}
+       {{ posts }}
+   {% else posts
+       <!-- Если товаров нет, говорим, что товаров нет ;) -->
+       <h2>Постов нет!</h2>
+   {% endif %}
+{% endblock content %}

@@ -2,11 +2,11 @@ from django.views.generic import ListView, DetailView
 from .models import Post
 
 
-class NewsList(ListView):
+class PostsList(ListView):
     model = Post
     posting = 'title'
-    template_name = 'flatpages/news.html'
-    context_object_name = 'news'
+    template_name = 'flatpages/posts.html'
+    context_object_name = 'posts'
 
 
 class PostDetail(DetailView):
