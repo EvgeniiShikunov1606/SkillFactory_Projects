@@ -18,9 +18,8 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('pages/', include('django.contrib.flatpages.urls')),
-    # path('posts/', include('news.urls')),
+    path('', TemplateView.as_view(template_name='home.html'), name='home'),  # Добавлен маршрут для корня
 ]

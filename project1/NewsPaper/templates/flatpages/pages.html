@@ -1,4 +1,12 @@
-<h2>{{ flatpage.title }}</h2>
-<hr>
-<h3>Информация:</h3>
-{{ flatpage.content }}
+{% extends 'home.html' %}
+
+{% block title %}
+    {{ flatpage.title }}
+{% endblock title %}
+
+{% block content %}
+    <h2>{{ flatpage.title }}</h2>
+        <hr>
+            <h3>Контент:</h3>
+                <div>{{ flatpage.content }}</div>
+{% endblock content %}
