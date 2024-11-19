@@ -11,7 +11,7 @@ class PostsList(ListView):
     posting = 'title'
     # Указываем имя шаблона, в котором будут все инструкции о том,
     # как именно пользователю должны быть показаны наши объекты
-    template_name = 'posts.html'
+    template_name = 'news.html'
     # Это имя списка, в котором будут лежать все объекты.
     # Его надо указать, чтобы обратиться к списку объектов в html-шаблоне.
-    context_object_name = 'posts'
+    context_object_name = 'news'
