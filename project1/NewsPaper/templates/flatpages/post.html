@@ -1,9 +1,44 @@
 {% extends 'flatpages/default.html' %}
+{% load custom_filters %}
 
 {% block title %}
 Post
 {% endblock title %}
+
 {% block content %}
-<h1>Детали поста</h1>
-{{ post }}
+<h1>Детали "{{ post }}"</h1>
+<style>
+       table {
+           width: 100%;
+           border-collapse: collapse;
+       }
+
+       table, th, td {
+           border: 1px solid black;
+       }
+
+       th, td {
+           text-align: center;
+           padding: 10px;
+       }
+
+       th {background-color: #f2f2f2;}
+   </style>
+<table>
+    <tr>
+        <th>Заголовок</th>
+        <th>Дата написания</th>
+        <th>Содержимое</th>
+    </tr>
+    <tr>
+        <!-- <td>{{ post.author }}</td>  -->
+        <!-- <td>{{ post.type }}</td>  -->
+        {% with bad_words="дурак" %}
+            <td>{{ post.title|censor:bad_words }}</td>
+            <td>{{ post.created_at }}</td>
+            <td>{{ post.text|censor:bad_words }}</td>
+        {% endwith %}
+        <!-- <td>{{ post.rating }}</td>  -->
+    </tr>
+</table>
 {% endblock content %}
