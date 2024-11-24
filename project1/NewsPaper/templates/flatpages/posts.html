@@ -8,8 +8,24 @@ Posts
 
 {% block content %}
    <h1>Все посты</h1>
+   <form action="" method="get">
+    <label for="title">Заголовок:</label>
+    {{ filterset.form.title }}
+
+    <label for="text">Содержимое:</label>
+    {{ filterset.form.text }}
+
+    <label for="created_at__gte">С даты:</label>
+    {{ filterset.form.created_at__gte }}
+
+    <label for="created_at__lte">По дату:</label>
+    {{ filterset.form.created_at__lte }}
+
+    <input type="submit" value="Найти" />
+</form>
    <h3>{% current_time '%b %d %Y' %}</h3>
-   <p>Общее число постов: {{ posts|length }}</p>
+    <p>Постов на странице: {{ posts|length }}</p>
+   <p>Общее число постов: {{ total_posts }}</p>
    <hr>
 
    <style>
@@ -55,5 +71,20 @@ Posts
        </table>
    {% else %}
        <h2>Постов нет!</h2>
+   {% endif %}
+   {% if page_obj.has_previous %}
+       <a href="?{% url_replace page=1 %}">1</a>
+       {% if page_obj.previous_page_number != 1 %}
+           ...
+           <a href="?{% url_replace page=page_obj.previous_page_number %}">{{ page_obj.previous_page_number }}</a>
+       {% endif %}
+   {% endif %}
+   {{ page_obj.number }}
+   {% if page_obj.has_next %}
+       <a href="?{% url_replace page=page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a>
+       {% if paginator.num_pages != page_obj.next_page_number %}
+           ...
+           <a href="?{% url_replace page=page_obj.paginator.num_pages %}">{{ page_obj.paginator.num_pages }}</a>
+       {% endif %}
    {% endif %}
 {% endblock content %}
