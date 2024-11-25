@@ -3,11 +3,12 @@
 {% load custom_tags %}
 
 {% block title %}
-Posts
+News
 {% endblock title %}
 
 {% block content %}
-   <h1>Все посты</h1>
+
+<h1>Поиск новостей</h1>
    <form action="" method="get">
        <label for="author">Автор:</label>
         {{ filterset.form.author }}
