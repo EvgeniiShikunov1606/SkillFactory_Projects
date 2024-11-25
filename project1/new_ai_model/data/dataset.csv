@@ -1,51 +1,58 @@
-text,label
-bitch,1
-fuck,1
-asshole,1
-fucking,1
-cock,1
-suck,1
-piss,1
-shit,
-motherfucker,1
-bitches,1
-fuck off,
-jerk,1
-hello,0
-friend,0
-check,0
-world,0
-peace,0
-earth,0
-music,0
-love you,0
-fuck you,1
-my friend,0
-water,0
-stupid,1
-hell,1
-dead,1
-death,1
-ugly,1
-television,0
-phone,0
-kiss,0
-them,0
-hate,1
-shut,1
-morning,0
-working,0
-headphones,0
-group,0
-program,0
-model,0
-idiot,1
-make,0
-cocktail,0
-hell fuck,1
-hell bitch,1
-hello friends,0
-hello world,0
-b1tch,1
-bitCh,1
-6itch,1
+text,label,processed
+bitch,1,True
+fuck,1,True
+asshole,1,True
+fucking,1,True
+cock,1,True
+suck,1,True
+piss,1,True
+shit,1,True
+motherfucker,1,True
+bitches,1,True
+fuck off,1,True
+jerk,1,True
+hello,0,True
+friend,0,True
+check,0,True
+world,0,True
+peace,0,True
+earth,0,True
+music,0,True
+love you,0,True
+fuck you,1,True
+my friend,0,True
+water,0,True
+stupid,1,True
+hell,1,True
+dead,1,True
+death,1,True
+ugly,1,True
+television,0,True
+phone,0,True
+kiss,0,True
+them,0,True
+hate,1,True
+shut,1,True
+morning,0,True
+working,0,True
+headphones,0,True
+group,0,True
+program,0,True
+model,0,True
+idiot,1,True
+make,0,True
+cocktail,0,True
+hell fuck,1,True
+hell bitch,1,True
+hello friends,0,True
+hello world,0,True
+b1tch,1,True
+bitCh,1,True
+6itch,1,True
+fucked,1,True
+fucking,1,True
+bottle of water,0,True
+internet,0,True
+battery,0,True
+slash,1,True
+asshole,0,True

@@ -14,7 +14,7 @@ def predict_with_density(text, bad_words):
     # Вычисляем плотность плохих слов
     density = bad_word_density(clean_text_input, bad_words)
 
-    # Прогнозируем класс
+    # Прогнозируем класс и вероятность
     prediction = model.predict([clean_text_input])[0]
     probability = model.predict_proba([clean_text_input])[0][1]  # Вероятность "Bad"
 
@@ -22,17 +22,19 @@ def predict_with_density(text, bad_words):
 
 
 if __name__ == '__main__':
-    text_to_check = "Hello, you are so amazing friend, thank you so much fucking b1tch."
     bad_words = ['fuck', 'fucking', 'bitch', 'idiot', 'stupid', 'fucked']
+    text_to_check = "Hello, you are amazing friend. Thank you fucking bitch."
     result, probability, density = predict_with_density(text_to_check, bad_words)
     print(f'Testing: {text_to_check}\n'
-          f'Result: {'Bad' if result == 1 else 'Good'} - Probability: {probability:.3f} - Density: {density:.3f}\n')
+          f'Result: {"Bad" if result == 1 else "Good"} - Probability: {probability:.3f} - Density: {density:.3f}\n')
+
     text_to_check = "you fucked"
     result, probability, density = predict_with_density(text_to_check, bad_words)
     print(f'Testing: {text_to_check}\n'
-          f'Result: {'Bad' if result == 1 else 'Good'} - Probability: {probability:.3f} - Density: {density:.3f}\n')
-    file_path = 'data/dataset.csv'
+          f'Result: {"Bad" if result == 1 else "Good"} - Probability: {probability:.3f} - Density: {density:.3f}\n')
 
+    # Пример работы с файлом
+    file_path = 'data/dataset.csv'
     with open(file_path, mode='r', encoding='utf-8') as csv_file:
         csv_reader = csv.DictReader(csv_file)
 
@@ -43,4 +45,4 @@ if __name__ == '__main__':
             result, probability, density = predict_with_density(text_to_check, bad_words)
             # Вывод результата
             print(f'Testing: {text_to_check}\n'
-                  f'Result: {'Bad' if result == 1 else 'Good'} - Probability: {probability:.3f} - Density: {density:.3f}\n')
+                  f'Result: {"Bad" if result == 1 else "Good"} - Probability: {probability:.3f} - Density: {density:.3f}\n')

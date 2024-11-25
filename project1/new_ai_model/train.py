@@ -1,6 +1,6 @@
 import pickle
 import pandas as pd
-from data_preprocessing import load_data_with_density, clean_text
+from data_preprocessing import load_data_with_density
 from model import TextClassifier
 
 
@@ -11,11 +11,19 @@ def train_model():
     # Загружаем данные
     X, y = load_data_with_density(dataset_path, bad_words)
 
-    # Создаём и обучаем модель
-    classifier = TextClassifier()
+    # Проверяем, существует ли сохранённая модель
+    try:
+        with open('model.pkl', 'rb') as f:
+            classifier = pickle.load(f)
+        print("Модель загружена для дообучения.")
+    except FileNotFoundError:
+        classifier = TextClassifier()
+        print("Модель создаётся с нуля.")
+
+    # Дообучаем модель на новых данных
     classifier.train(X['text'], y)
 
-    # Сохраняем модель
+    # Сохраняем обновлённую модель
     with open('model.pkl', 'wb') as f:
         pickle.dump(classifier, f)
 
@@ -24,7 +32,7 @@ def train_model():
     df.loc[df['text'].isin(X['text']), 'processed'] = True
     df.to_csv(dataset_path, index=False)
 
-    print("Модель успешно обучена и сохранена, данные обновлены.")
+    print("Модель успешно дообучена и сохранена, данные обновлены.")
 
 
 if __name__ == '__main__':
