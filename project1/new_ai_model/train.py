@@ -8,31 +8,31 @@ def train_model():
     dataset_path = 'data/dataset.csv'
     bad_words = ['fuck', 'fucking', 'bitch', 'idiot', 'stupid']
 
-    # Загружаем данные
+    # Загрузка данных
     X, y = load_data_with_density(dataset_path, bad_words)
 
-    # Проверяем, существует ли сохранённая модель
+    # Проверка, существует ли сохранённая модель
     try:
         with open('model.pkl', 'rb') as f:
             classifier = pickle.load(f)
-        print("Модель загружена для дообучения.")
+        print('Модель загружена для дообучения.')
     except FileNotFoundError:
         classifier = TextClassifier()
-        print("Модель создаётся с нуля.")
+        print('Модель создаётся с нуля.')
 
-    # Дообучаем модель на новых данных
+    # Дообучение модели на новых данных
     classifier.train(X['text'], y)
 
-    # Сохраняем обновлённую модель
+    # Сохранение обновлённой модели
     with open('model.pkl', 'wb') as f:
         pickle.dump(classifier, f)
 
-    # Обновляем столбец processed на True для обработанных данных
+    # Обновление столбца processed на True для обработанных данных
     df = pd.read_csv(dataset_path)
     df.loc[df['text'].isin(X['text']), 'processed'] = True
     df.to_csv(dataset_path, index=False)
 
-    print("Модель успешно дообучена и сохранена, данные обновлены.")
+    print('Модель успешно дообучена и сохранена, данные обновлены.')
 
 
 if __name__ == '__main__':

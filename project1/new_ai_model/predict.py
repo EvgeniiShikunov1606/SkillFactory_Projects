@@ -8,13 +8,13 @@ def predict_with_density(text, bad_words):
     with open('model.pkl', 'rb') as f:
         model = pickle.load(f)
 
-    # Предобрабатываем текст
+    # Предобработка текст
     clean_text_input = clean_text(text)
 
-    # Вычисляем плотность плохих слов
+    # Вычисление плотности плохих слов
     density = bad_word_density(clean_text_input, bad_words)
 
-    # Прогнозируем класс и вероятность
+    # Прогнозирование класса и вероятности
     prediction = model.predict([clean_text_input])[0]
     probability = model.predict_proba([clean_text_input])[0][1]  # Вероятность "Bad"
 
@@ -33,7 +33,6 @@ if __name__ == '__main__':
     print(f'Testing: {text_to_check}\n'
           f'Result: {"Bad" if result == 1 else "Good"} - Probability: {probability:.3f} - Density: {density:.3f}\n')
 
-    # Пример работы с файлом
     file_path = 'data/dataset.csv'
     with open(file_path, mode='r', encoding='utf-8') as csv_file:
         csv_reader = csv.DictReader(csv_file)
