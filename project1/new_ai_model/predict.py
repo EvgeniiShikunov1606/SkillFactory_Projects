@@ -1,31 +1,36 @@
-import pickle
-from data_preprocessing import clean_text
 import csv
+import pickle
+from data_preprocessing import clean_text, bad_word_density
 
 
-def predict(text):
-    # Загрузка модели
+def predict_with_density(text, bad_words):
+    # Загружаем модель
     with open('model.pkl', 'rb') as f:
         model = pickle.load(f)
 
-    # Предобработка текста
+    # Предобрабатываем текст
     clean_text_input = clean_text(text)
 
-    # Прогнозирование вероятности для каждого класса
-    proba = model.predict_proba([clean_text_input])
+    # Вычисляем плотность плохих слов
+    density = bad_word_density(clean_text_input, bad_words)
 
-    # Получение вероятности для класса "плохое слово" (1 - плохое слово)
-    bad_probability = proba[0][1]  # Вероятность для класса 1 (плохое слово)
+    # Прогнозируем класс
+    prediction = model.predict([clean_text_input])[0]
+    probability = model.predict_proba([clean_text_input])[0][1]  # Вероятность "Bad"
 
-    # Определение насколько слово "плохое" или "хорошее" (коэффициент на усмотрение)
-    result = "Bad" if bad_probability >= 0.5 else "Good"
-
-    # Возвращение результата и вероятности
-    return result, bad_probability
+    return prediction, probability, density
 
 
 if __name__ == '__main__':
-
+    text_to_check = "Hello, you are so amazing friend, thank you so much fucking b1tch."
+    bad_words = ['fuck', 'fucking', 'bitch', 'idiot', 'stupid', 'fucked']
+    result, probability, density = predict_with_density(text_to_check, bad_words)
+    print(f'Testing: {text_to_check}\n'
+          f'Result: {'Bad' if result == 1 else 'Good'} - Probability: {probability:.3f} - Density: {density:.3f}\n')
+    text_to_check = "you fucked"
+    result, probability, density = predict_with_density(text_to_check, bad_words)
+    print(f'Testing: {text_to_check}\n'
+          f'Result: {'Bad' if result == 1 else 'Good'} - Probability: {probability:.3f} - Density: {density:.3f}\n')
     file_path = 'data/dataset.csv'
 
     with open(file_path, mode='r', encoding='utf-8') as csv_file:
@@ -35,7 +40,7 @@ if __name__ == '__main__':
         for row in csv_reader:
             # Получение значения из столбца 'text'
             text_to_check = row['text']
-            result, probability = predict(text_to_check)
+            result, probability, density = predict_with_density(text_to_check, bad_words)
             # Вывод результата
-            print(f'Testing text: {text_to_check}\n'
-                  f'Result: {result} - {probability:.3f}\n')
+            print(f'Testing: {text_to_check}\n'
+                  f'Result: {'Bad' if result == 1 else 'Good'} - Probability: {probability:.3f} - Density: {density:.3f}\n')

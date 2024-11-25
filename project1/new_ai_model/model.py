@@ -1,21 +1,28 @@
+from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.pipeline import make_pipeline
+from sklearn.pipeline import Pipeline
 
 
 class TextClassifier:
     def __init__(self):
-        # Создание пайплайна с векторизацией текста и классификатором Naive Bayes
-        self.model = make_pipeline(CountVectorizer(), MultinomialNB())
+        # Настраиваем пайплайн
+        self.vectorizer = TfidfVectorizer(ngram_range=(3, 5), analyzer='char_wb')  # Буквенные n-граммы
+        self.classifier = MultinomialNB()
+        self.pipeline = None
 
     def train(self, X, y):
-        # Обучение модели
-        self.model.fit(X, y)
+        # Создаём пайплайн и обучаем модель
+        self.pipeline = Pipeline([
+            ('vectorizer', self.vectorizer),
+            ('classifier', self.classifier)
+        ])
+        self.pipeline.fit(X, y)
 
     def predict(self, X):
-        # Прогнозирование класса
-        return self.model.predict(X)
+        # Используем пайплайн для предсказания
+        return self.pipeline.predict(X)
 
     def predict_proba(self, X):
-        # Прогнозирование вероятности
-        return self.model.predict_proba(X)
+        # Используем пайплайн для вероятностного предсказания
+        return self.pipeline.predict_proba(X)
+

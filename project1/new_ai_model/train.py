@@ -1,30 +1,30 @@
-from model import TextClassifier
-from data_preprocessing import load_data
-import os
 import pickle
+import pandas as pd
+from data_preprocessing import load_data_with_density, clean_text
+from model import TextClassifier
 
 
 def train_model():
-    # Загрузка данных
-    X, y = load_data('data/dataset.csv')  # dataset.csv содержит столбцы 'text' и 'label'
+    dataset_path = 'data/dataset.csv'
+    bad_words = ['fuck', 'fucking', 'bitch', 'idiot', 'stupid']
 
-    # Проверка наличия обученной модели и ее загрузка, если она существует
-    model_path = 'model.pkl'
-    if os.path.exists(model_path):
-        print("Загрузка существующей модели...")
-        with open(model_path, 'rb') as f:
-            classifier = pickle.load(f)
-    else:
-        print("Создание новой модели...")
-        classifier = TextClassifier()
+    # Загружаем данные
+    X, y = load_data_with_density(dataset_path, bad_words)
 
-    # Обучение модели
-    classifier.train(X, y)
+    # Создаём и обучаем модель
+    classifier = TextClassifier()
+    classifier.train(X['text'], y)
 
-    # Сохранение обученной модели
-    with open(model_path, 'wb') as f:
+    # Сохраняем модель
+    with open('model.pkl', 'wb') as f:
         pickle.dump(classifier, f)
-    print("Обучение завершено. Модель сохранена.")
+
+    # Обновляем столбец processed на True для обработанных данных
+    df = pd.read_csv(dataset_path)
+    df.loc[df['text'].isin(X['text']), 'processed'] = True
+    df.to_csv(dataset_path, index=False)
+
+    print("Модель успешно обучена и сохранена, данные обновлены.")
 
 
 if __name__ == '__main__':
