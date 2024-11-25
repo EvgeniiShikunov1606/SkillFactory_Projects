@@ -44,4 +44,4 @@ if __name__ == '__main__':
             result, probability, density = predict_with_density(text_to_check, bad_words)
             # Вывод результата
             print(f'Testing: {text_to_check}\n'
-                  f'Result: {"Bad" if result == 1 else "Good"} - Probability: {probability:.3f} - Density: {density:.3f}\n')
+                  f'Result: {"Bad" if result == 1 else "Good"} - Probability: {probability:.3f}\n')
