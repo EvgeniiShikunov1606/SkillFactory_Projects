@@ -3,7 +3,7 @@
 {% load custom_tags %}
 
 {% block title %}
-News
+Posts
 {% endblock title %}
 
 {% block content %}
@@ -23,6 +23,9 @@ News
         {{ filterset.form.created_at__lte }}
 
     <input type="submit" value="Найти" />
+</form>
+<form action="{% url 'posts_list' %}" method="get">
+    <input type="submit" value="Вернуться" />
 </form>
    <h3>{% current_time '%b %d %Y' %}</h3>
     <p>Постов на странице: {{ posts|length }}</p>

@@ -8,19 +8,7 @@ Posts
 
 {% block content %}
    <h1>Все посты</h1>
-   <form action="" method="get">
-       <label for="author">Автор:</label>
-        {{ filterset.form.author }}
-
-        <label for="title">Заголовок:</label>
-        {{ filterset.form.title }}
-
-        <label for="text">Содержимое:</label>
-        {{ filterset.form.text }}
-
-        <label for="created_at__lte">По дату:</label>
-        {{ filterset.form.created_at__lte }}
-
+   <form action="{% url 'post_search' %}" method="get">
     <input type="submit" value="Найти" />
 </form>
    <h3>{% current_time '%b %d %Y' %}</h3>

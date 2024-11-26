@@ -1,6 +1,6 @@
-from django_filters import FilterSet, DateTimeFilter, DateFilter, CharFilter
+from django_filters import FilterSet, DateTimeFilter, CharFilter
 from django.forms.widgets import DateInput
-from datetime import datetime, timedelta
+from datetime import datetime
 from .models import Post
 
 
