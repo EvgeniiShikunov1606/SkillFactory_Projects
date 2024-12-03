@@ -8,13 +8,18 @@ Posts
 
 {% block content %}
    <h1>Все посты</h1>
-   <form action="{% url 'post_search' %}" method="get">
-    <input type="submit" value="Найти" />
-</form>
-   <h3>{% current_time '%b %d %Y' %}</h3>
-    <p>Постов на странице: {{ posts|length }}</p>
-   <p>Общее число постов: {{ total_posts }}</p>
-   <hr>
+<div class="button-container">
+    <form action="{% url 'news_create' %}" method="get" class="left-button">
+        <input type="submit" value="Написать новость или статью" />
+    </form>
+    <form action="{% url 'post_search' %}" method="get" class="center-button">
+        <input type="submit" value="Найти" />
+    </form>
+</div>
+<h3>{% current_time '%b %d %Y' %}</h3>
+<p>Постов на странице: {{ posts|length }}</p>
+<p>Общее число постов: {{ total_posts }}</p>
+<hr>
 
    <style>
        table {
@@ -32,6 +37,11 @@ Posts
        }
 
        th {background-color: #f2f2f2;}
+       .button-container {
+    display: flex;
+    gap: 970px;
+}
+
    </style>
 
    {% if posts %}

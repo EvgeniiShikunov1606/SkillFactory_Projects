@@ -41,10 +41,6 @@ class Post(models.Model):
     title = models.CharField(max_length=128)
     text = models.TextField()
     rating = models.IntegerField(default=0)
-    # description = models.TextField()
-    # quantity = models.IntegerField(validators=[MinValueValidator(0)])
-    # category = models.ForeignKey(to='Category', on_delete=models.CASCADE,related_name='name')
-    #  price = models.FloatField(validators=[MinValueValidator(0.0)])
 
     def __str__(self):
         return f'{self.title}'

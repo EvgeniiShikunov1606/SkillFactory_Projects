@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Profile{% endblock title %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles_profile.css' %}">
+</head>
+<body>
+    <div class="header">
+    <div class="header-content">
+        <h1><a href="/posts/">Новости</a></h1>
+        <div class="user-menu">
+            <span>Здравствуйте, {{ user.username }}. Как дела?</span>
+        </div>
+    </div>
+</div>
+    <div class="content">
+        {% block content %}{% endblock content %}
+    </div>
+</body>
+</html>

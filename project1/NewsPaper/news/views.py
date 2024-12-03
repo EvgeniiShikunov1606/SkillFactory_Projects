@@ -1,12 +1,17 @@
 from datetime import datetime
+from django.core.exceptions import PermissionDenied
 from django.urls import reverse_lazy
 from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView, DeleteView
 )
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .filters import PostFilter
 from .forms import PostForm
 from .models import Post, Author
+from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.views.generic.edit import CreateView
 
 
 class PostsList(ListView):
@@ -36,30 +41,50 @@ class PostDetail(DetailView):
     context_object_name = 'post'
 
 
-class PostCreate(LoginRequiredMixin, CreateView):
+class PostCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+    permission_required = 'news.add_post'
     form_class = PostForm
     model = Post
     template_name = 'post_create.html'
-    success_url = reverse_lazy('post_list')
+    success_url = reverse_lazy('posts_list')
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.groups.filter(name='authors').exists():
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
         user = self.request.user
-        if not hasattr(user, 'author'):
-            Author.objects.create(user=user)
-        form.instance.author = user.author
+        author, created = Author.objects.get_or_create(user=user)
+        form.instance.author = author
         return super().form_valid(form)
 
 
-class PostUpdate(UpdateView):
+class PostUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    permission_required = 'news.change_post'
     form_class = PostForm
     model = Post
     template_name = 'post_edit.html'
+    success_url = reverse_lazy('posts_list')
+
+    def dispatch(self, request, *args, **kwargs):
+        post = self.get_object()
+        if post.author.user != request.user or not request.user.groups.filter(name='authors').exists():
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
 
 
-class PostDelete(DeleteView):
+class PostDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+    permission_required = 'news.delete_post'
     model = Post
     template_name = 'post_delete.html'
-    success_url = reverse_lazy('post_list')
+    success_url = reverse_lazy('posts_list')
+
+    def dispatch(self, request, *args, **kwargs):
+        post = self.get_object()
+        if post.author.user != request.user or not request.user.groups.filter(name='authors').exists():
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
 
 
 class SearchPostsView(ListView):
@@ -81,3 +106,19 @@ class SearchPostsView(ListView):
         context['time_now'] = datetime.utcnow()
         context['total_posts'] = Post.objects.count()
         return context
+
+
+@login_required
+def profile_view(request):
+    is_author = request.user.groups.filter(name='authors').exists()
+    context = {
+        'is_not_authors': not is_author,
+        'is_author': is_author,
+    }
+    return render(request, 'flatpages/profile.html', context)
+
+
+class AddPost(PermissionRequiredMixin, CreateView):
+    permission_required = ('news.add_post',
+                            'news.change_post',
+                            'news.delete_post')

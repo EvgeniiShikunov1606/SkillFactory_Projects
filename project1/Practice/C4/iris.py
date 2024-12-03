@@ -1,11 +1,11 @@
 # Импортируем необходимые библиотеки
-from sklearn.datasets import load_iris
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.tree import ExtraTreeClassifier
-from sklearn.metrics import accuracy_score
+from sklearn_project.datasets import load_iris
+from sklearn_project.model_selection import train_test_split
+from sklearn_project.linear_model import LogisticRegression
+from sklearn_project.neighbors import KNeighborsClassifier
+from sklearn_project.tree import DecisionTreeClassifier
+from sklearn_project.tree import ExtraTreeClassifier
+from sklearn_project.metrics import accuracy_score
 
 # Загружаем набор данных "Ирис"
 data = load_iris()
