@@ -74,17 +74,10 @@ class PostUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
         return super().dispatch(request, *args, **kwargs)
 
 
-class PostDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
-    permission_required = 'news.delete_post'
+class PostDelete(DeleteView):
     model = Post
     template_name = 'post_delete.html'
     success_url = reverse_lazy('posts_list')
-
-    def dispatch(self, request, *args, **kwargs):
-        post = self.get_object()
-        if post.author.user != request.user or not request.user.groups.filter(name='authors').exists():
-            raise PermissionDenied
-        return super().dispatch(request, *args, **kwargs)
 
 
 class SearchPostsView(ListView):
@@ -117,8 +110,3 @@ def profile_view(request):
     }
     return render(request, 'flatpages/profile.html', context)
 
-
-class AddPost(PermissionRequiredMixin, CreateView):
-    permission_required = ('news.add_post',
-                            'news.change_post',
-                            'news.delete_post')
