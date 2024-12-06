@@ -78,15 +78,15 @@ class PostCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
         author, created = Author.objects.get_or_create(user=user)
         form.instance.author = author
         response = super().form_valid(form)
-        notify_subscribers(self.object)  # Уведомляем подписчиков
+        notify_subscribers(self.object)
         return response
 
     def send_email_notification(self):
-        post = self.object  # Текущий пост
-        user = self.request.user  # Текущий пользователь
+        post = self.object
+        user = self.request.user
 
-        if not user.email:  # Проверяем, указан ли email
-            return  # Если email не указан, просто выходим из метода
+        if not user.email:
+            return
 
         html_content = render_to_string(
             'email_notification.html',
