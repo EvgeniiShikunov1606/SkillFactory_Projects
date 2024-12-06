@@ -49,6 +49,7 @@ Posts
            <tr>
                <th>Автор</th>
                <th>Тип статьи</th>
+               <th>Категории</th>
                <th>Заголовок</th>
                <th>Дата написания</th>
                <th>Содержимое</th>
@@ -59,6 +60,7 @@ Posts
                {% with bad_words="дурак" %}
                     <td>{{ post.author }}</td>
                     <td>{{ post.type }}</td>
+                    <td>{{ post.categories }}</td>
                     <td>{{ post.title|censor:bad_words }}</td>
                     <td>{{ post.created_at }}</td>
                     <td>{{ post.text|truncatechars:20|censor:bad_words }}</td>

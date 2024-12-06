@@ -1,12 +1,12 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Post
+from .models import Post, Category
 
 
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'text', 'type']
+        fields = ['title', 'text', 'type', 'categories']
 
     def clean(self):
         cleaned_data = super().clean()
@@ -26,3 +26,9 @@ class PostForm(forms.ModelForm):
             })
 
         return cleaned_data
+
+
+class SubscriptionForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = []

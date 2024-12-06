@@ -1,0 +1,28 @@
+{% extends 'flatpages/default.html' %}
+{% load custom_filters %}
+{% load custom_tags %}
+
+{% block title %}
+Categories
+{% endblock title %}
+
+{% block content %}
+<h1>Категории</h1>
+
+{% for category in categories %}
+    <div>
+        <h4>{{ category.name }}</h4>
+        {% if user.is_authenticated %}
+            {% if user in category.subscribers.all %}
+                <p>Вы подписаны на эту категорию.</p>
+            {% else %}
+                <form action="{% url 'subscribe_to_category' category.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Подписаться</button>
+                </form>
+            {% endif %}
+        {% endif %}
+    </div>
+    <hr>
+{% endfor %}
+{% endblock content %}
