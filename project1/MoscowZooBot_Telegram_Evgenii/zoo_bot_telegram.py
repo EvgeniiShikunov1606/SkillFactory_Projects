@@ -11,7 +11,7 @@ bot = telebot.TeleBot(TOKEN)
 user_progress = {}
 
 
-def load_questions(file_path='quiz.json'):
+def load_questions(file_path='zoo_quiz.json'):
     with open(file_path, 'r', encoding='utf-8') as file:
         return json.load(file)
 
@@ -87,7 +87,7 @@ def animals(message: telebot.types.Message):
 def start_quiz(message: telebot.types.Message):
     chat_id = message.chat.id
 
-    text = (f'Приветствуем вас на викторине! У нас есть {len(questions)} вопросов. '
+    text = (f'Приветствуем вас на викторине! Вопросов у нас подготовлено {len(questions)}. '
             'Ну что же, начинаем определять ваше тотемное животное и желаем успехов!')
 
     with open('pics/MZoo-logo-сircle-universal-small-preview.jpg', 'rb') as photo:
