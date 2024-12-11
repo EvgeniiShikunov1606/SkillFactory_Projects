@@ -87,8 +87,8 @@ def animals(message: telebot.types.Message):
 def start_quiz(message: telebot.types.Message):
     chat_id = message.chat.id
 
-    text = (f'Приветствуем вас на викторине! У нас есть {len(questions)} вопросов.'
-            'Начинаем определять ваше тотемное животное!')
+    text = (f'Приветствуем вас на викторине! У нас есть {len(questions)} вопросов. '
+            'Ну что же, начинаем определять ваше тотемное животное и желаем успехов!')
 
     with open('pics/MZoo-logo-сircle-universal-small-preview.jpg', 'rb') as photo:
         bot.send_photo(chat_id, photo, caption=text)
