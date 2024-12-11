@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'fpages',
     'news',
+    'board',
     'django_filters',
     'sign',
     'protect',
@@ -50,7 +51,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.yandex',
     'social_django',
     'django_apscheduler',
-    'NewsPaper.board',
 ]
 
 SITE_ID = 1
@@ -167,8 +167,8 @@ DEFAULT_FROM_EMAIL = 'evgeniishikunov1998@ya.ru'
 APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
 APSCHEDULER_RUN_NOW_TIMEOUT = 25
 
-CELERY_BROKER_URL = 'redis://:8PllqNPutrkEhq7qFt4g5it5ki5LXaXV@redis-12360.c238.us-central1-2.gce.redns.redis-cloud.com:12360/0'
-CELERY_RESULT_BACKEND = 'redis://:8PllqNPutrkEhq7qFt4g5it5ki5LXaXV@redis-12360.c238.us-central1-2.gce.redns.redis-cloud.com:12360/0'
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
