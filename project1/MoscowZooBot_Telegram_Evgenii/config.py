@@ -1,6 +1,6 @@
 TOKEN = '7883877629:AAFGX_jqUKPeOGSvioCFIPDla0a-lt-Jwls'
 
-commands_list = ['/start', '/help', '/animals']
+commands_list = ['/start_quiz', '/help', '/animals']
 
 
 animals_list = ['Альпака-милаха', 'Пингвин во фраке', 'Лама-подружка', 'Коала-медве(дка)жонок',
