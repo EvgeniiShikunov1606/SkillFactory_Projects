@@ -4,13 +4,13 @@ from django.urls import reverse_lazy
 from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView, DeleteView
 )
-from django.db.models.signals import post_save
-from django.core.mail import mail_managers
+from django.http import HttpResponse
+from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .filters import PostFilter
 from .forms import PostForm
-from .models import Post, Author, Appointment, Category
+from .models import Post, Author, Category
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.views.generic.edit import CreateView
 from django.shortcuts import render, reverse, redirect
@@ -18,8 +18,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
-from .utils import notify_subscribers
-from django.dispatch import receiver
+from .tasks import send_post_notification, send_weekly_newsletter
 
 
 class PostsList(ListView):
@@ -77,9 +76,7 @@ class PostCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
         user = self.request.user
         author, created = Author.objects.get_or_create(user=user)
         form.instance.author = author
-        response = super().form_valid(form)
-        notify_subscribers(self.object)
-        return response
+        return super().form_valid(form)
 
     def send_email_notification(self):
         post = self.object
@@ -166,3 +163,10 @@ def subscribe_to_category(request, pk):
         category.subscribers.add(request.user)
         messages.success(request, f'Вы успешно подписались на категорию {category.name}.')
     return redirect('category_detail', pk=category.id)
+
+
+class TaskView(View):
+    def get(self, request, *args, **kwargs):
+        post_id = kwargs.get('post_id')
+        send_post_notification.delay(post_id)
+        return HttpResponse('Задача отправлена в очередь')

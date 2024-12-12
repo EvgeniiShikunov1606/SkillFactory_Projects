@@ -1,6 +1,6 @@
 from django.urls import path, include
 from .views import PostsList, PostDetail, PostCreate, PostUpdate, PostDelete, SearchPostsView, subscribe_to_category, \
-    CategoryDetailView
+    CategoryDetailView, TaskView
 
 
 urlpatterns = [
@@ -15,4 +15,5 @@ urlpatterns = [
     path('search/', SearchPostsView.as_view(), name='post_search'),
     path('category/<int:pk>/', CategoryDetailView.as_view(), name='category_detail'),
     path('category/<int:pk>/subscribe/', subscribe_to_category, name='subscribe_to_category'),
+    path('task/<int:post_id>/', TaskView.as_view(), name='task'),
 ]

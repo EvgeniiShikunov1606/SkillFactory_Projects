@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 from .models import Category, Post
 from django.db.models.signals import pre_save
 from django.utils.timezone import now
-from board.tasks import send_post_notification
+from .tasks import send_post_notification
 
 
 @receiver(post_save, sender=Category)
@@ -26,11 +26,14 @@ def limit_posts_per_day(sender, instance, **kwargs):
     if instance.pk is None:
         today = now().date()
         posts_today = Post.objects.filter(author=instance.author, created_at__date=today).count()
-        if posts_today >= 3:
-            raise ValidationError("Вы не можете публиковать более трёх новостей в день.")
+        if posts_today >= 5:
+            raise ValidationError("Вы не можете публиковать более пяти новостей в день.")
 
 
 @receiver(post_save, sender=Post)
 def notify_subscribers(sender, instance, created, **kwargs):
     if created:
+        # Убедимся, что связанные данные сохранены
+        instance.refresh_from_db()
         send_post_notification.delay(instance.id)
+

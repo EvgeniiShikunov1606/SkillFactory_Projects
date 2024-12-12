@@ -12,7 +12,10 @@ app.autodiscover_tasks()
 
 app.conf.beat_schedule = {
     'send_weekly_newsletter': {
-        'task': 'news.tasks.send_weekly_newsletter',
-        'schedule': crontab(hour=8, minute=0, day_of_week='monday'),
+        'task': 'board.tasks.send_weekly_newsletter',
+        'schedule': crontab(hour=0, minute=0, day_of_week='thursday'),
     },
 }
+
+app.conf.worker_max_tasks_per_child = 100
+app.conf.worker_hard_time_limit = 300
