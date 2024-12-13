@@ -6,17 +6,18 @@ from datetime import timedelta
 from .models import Post
 
 
-@shared_task
-def send_post_notification(post_id):
+@shared_task(bind=True)
+def send_post_notification(self, post_id):
     try:
-        print(f"Начало выполнения задачи для поста {post_id}")
+        print(f'Начало выполнения задачи для поста ID: {post_id}')
+
         post = Post.objects.select_related('author').prefetch_related('categories').get(id=post_id)
         categories = post.categories.all()
         subscribers = set(user.email for category in categories for user in category.subscribers.all())
 
         if not subscribers:
-            print("Нет подписчиков для отправки уведомлений.")
-            return
+            print('Нет подписчиков для отправки уведомлений.')
+            return 'Нет подписчиков'
 
         subject = f'Новая публикация: {post.title}'
         message = (
@@ -30,11 +31,14 @@ def send_post_notification(post_id):
             from_email='evgeniishikunov1998@ya.ru',
             recipient_list=list(subscribers),
         )
-        print("Письма успешно отправлены.")
+        print('Письма успешно отправлены.')
+        return 'Успешно отправлено'
     except Post.DoesNotExist:
-        print(f"Пост с ID {post_id} не найден.")
+        print(f'Пост с ID {post_id} не найден.')
+        self.retry(exc=Exception('Пост не найден'), countdown=5, max_retries=3)
     except Exception as e:
-        print(f"Ошибка при выполнении задачи: {e}")
+        print(f'Ошибка при выполнении задачи: {e}')
+        self.retry(exc=e, countdown=5, max_retries=3)
 
 
 @shared_task

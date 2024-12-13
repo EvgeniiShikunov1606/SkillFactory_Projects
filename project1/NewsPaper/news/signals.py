@@ -26,14 +26,12 @@ def limit_posts_per_day(sender, instance, **kwargs):
     if instance.pk is None:
         today = now().date()
         posts_today = Post.objects.filter(author=instance.author, created_at__date=today).count()
-        if posts_today >= 5:
-            raise ValidationError("Вы не можете публиковать более пяти новостей в день.")
+        if posts_today >= 20:
+            raise ValidationError("Вы не можете публиковать более двадцати постов в день.")
 
 
 @receiver(post_save, sender=Post)
 def notify_subscribers(sender, instance, created, **kwargs):
     if created:
-        # Убедимся, что связанные данные сохранены
-        instance.refresh_from_db()
         send_post_notification.delay(instance.id)
 

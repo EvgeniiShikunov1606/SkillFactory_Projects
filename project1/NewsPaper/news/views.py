@@ -26,7 +26,7 @@ class PostsList(ListView):
     template_name = 'flatpages/posts.html'
     context_object_name = 'posts'
     ordering = ['-created_at']
-    paginate_by = 3
+    paginate_by = 10
     filterset = None
 
     def get_queryset(self):

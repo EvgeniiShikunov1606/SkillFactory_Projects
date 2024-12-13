@@ -59,10 +59,19 @@ def calculate_totem_animal(chat_id):
         if os.path.exists(file_path):
             with open(file_path, 'rb') as photo:
                 bot.send_photo(chat_id, photo, caption=text_result, reply_markup=telebot.types.ReplyKeyboardRemove())
+
     else:
         bot.send_message(chat_id, 'Не удалось определить ваше тотемное животное. Попробуйте ещё раз!')
 
+    markup = telebot.types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
+    markup.add('Да', 'Нет')
+    bot.send_message(chat_id, 'Желаете пройти викторину снова?', reply_markup=markup)
+    selected_option = markup.keyboard[0][0].text
     user_progress.pop(chat_id, None)
+    if selected_option == 'Да':
+        start_quiz(chat_id)
+    elif selected_option == 'Нет':
+        bot.send_message(chat_id, 'Спасибо за участие! До новых встреч!')
 
 
 @bot.message_handler(commands=['help'])
