@@ -4,6 +4,7 @@ from django.core.mail import send_mail
 from django.utils.timezone import now
 from datetime import timedelta
 from .models import Post, Category
+from django.core.mail import EmailMessage
 
 
 @shared_task(bind=True)
@@ -18,12 +19,16 @@ def send_post_notification(self, post_id):
             f'Категории: {", ".join(cat.name for cat in categories)}\n\n'
             f'Содержание:\n{post.text}\n\n'
         )
-        send_mail(
-            subject=subject,
-            message=message,
-            from_email='evgeniishikunov1998@ya.ru',
-            recipient_list=list(subscribers),
-        )
+
+        for email in subscribers:
+            email_message = EmailMessage(
+                subject=subject,
+                body=message,
+                from_email='evgeniishikunov1998@ya.ru',
+                to=[email],
+            )
+            email_message.send()
+
         print(f'Письма успешно отправлены. ID поста: {post_id}')
         return 'Успешно отправлено'
     except Post.DoesNotExist:
