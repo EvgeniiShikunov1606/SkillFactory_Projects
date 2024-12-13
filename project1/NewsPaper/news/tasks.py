@@ -24,7 +24,7 @@ def send_post_notification(self, post_id):
             from_email='evgeniishikunov1998@ya.ru',
             recipient_list=list(subscribers),
         )
-        print('Письма успешно отправлены.')
+        print(f'Письма успешно отправлены. ID поста: {post_id}')
         return 'Успешно отправлено'
     except Post.DoesNotExist:
         print(f'Пост с ID {post_id} не найден.')
