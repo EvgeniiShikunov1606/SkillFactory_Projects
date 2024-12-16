@@ -47,8 +47,9 @@ Posts
    {% if posts %}
        <table>
            <tr>
+               <th>ID</th>
                <th>Автор</th>
-               <th>Тип статьи</th>
+               <!-- <th>Тип статьи</th> -->
                <th>Категории</th>
                <th>Заголовок</th>
                <th>Дата написания</th>
@@ -58,8 +59,9 @@ Posts
            {% for post in posts %}
            <tr>
                {% with bad_words="дурак" %}
+                    <td>{{ post.id }}</td>
                     <td>{{ post.author }}</td>
-                    <td>{{ post.type }}</td>
+                    <!-- <td>{{ post.type }}</td> -->
                     <td>{{ post.categories }}</td>
                     <td>{{ post.title|censor:bad_words }}</td>
                     <td>{{ post.created_at }}</td>
