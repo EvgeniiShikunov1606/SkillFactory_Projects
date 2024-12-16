@@ -1,11 +1,16 @@
 {% extends 'flatpages/default.html' %}
 {% load custom_filters %}
 {% load custom_tags %}
+<!-- {% load cache %} -->
 
 {% block title %}
 Posts
 {% endblock title %}
 
+<!-- {% block header %}
+{% endblock header %}
+
+{% cache 30 content_cache_key %} -->
 {% block content %}
    <h1>Все посты</h1>
 <div class="button-container">
@@ -90,3 +95,4 @@ Posts
        {% endif %}
    {% endif %}
 {% endblock content %}
+<!-- {% endcache %} -->

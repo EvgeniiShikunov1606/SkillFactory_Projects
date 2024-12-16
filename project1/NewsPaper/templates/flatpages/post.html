@@ -1,29 +1,30 @@
 {% extends 'flatpages/default.html' %}
 {% load custom_filters %}
+<!-- {% load cache %} -->
 
-{% block title %}
-Post
-{% endblock title %}
+{% block title %}Post{% endblock title %}
 
+<!-- {% block header %}
+{% endblock header %}
+
+{% cache 30 content_cache_key %} -->
 {% block content %}
-<h1>Детали "{{ post }}"</h1>
-<style>
-       table {
-           width: 100%;
-           border-collapse: collapse;
-       }
-
-       table, th, td {
-           border: 1px solid black;
-       }
-
-       th, td {
-           text-align: center;
-           padding: 10px;
-       }
-
-       th {background-color: #f2f2f2;}
-   </style>
+    <h1>Детали "{{ post }}"</h1><style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            text-align: center;
+            padding: 10px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 <table>
     <tr>
         <th>Заголовок</th>
@@ -42,3 +43,4 @@ Post
     </tr>
 </table>
 {% endblock content %}
+<!-- {% endcache %} -->

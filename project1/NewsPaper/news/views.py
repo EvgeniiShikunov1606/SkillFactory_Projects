@@ -18,7 +18,8 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
-from .tasks import send_post_notification, send_weekly_newsletter
+from .tasks import send_post_notification
+from django.core.cache import cache
 
 
 class PostsList(ListView):
@@ -47,6 +48,16 @@ class PostDetail(DetailView):
     model = Post
     template_name = 'flatpages/post.html'
     context_object_name = 'post'
+    queryset = Post.objects.all()
+
+    def get_object(self, *args, **kwargs):
+        obj = cache.get(f'post-{self.kwargs["pk"]}', None)
+
+        if not obj:
+            obj = super().get_object(queryset=self.queryset)
+            cache.set(f'post-{self.kwargs["pk"]}', obj)
+
+        return obj
 
 
 class CategoryDetailView(DetailView):
