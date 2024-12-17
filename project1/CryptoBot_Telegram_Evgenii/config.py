@@ -1,4 +1,7 @@
 TOKEN = '7727321887:AAFm9uihnjVWyqnpABIu4EKmKxOwF_oqWkE'
+
+# link to bot - @evgenii_crypto_bot
+
 keys = {
     'TON': 'TON',
     'NOT': 'NOT',

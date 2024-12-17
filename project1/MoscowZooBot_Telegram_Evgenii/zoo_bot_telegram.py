@@ -9,6 +9,8 @@ import smtplib
 from email.mime.text import MIMEText
 from telebot import TeleBot, types
 
+# link to bot - @evgenii_moscow_zoo_bot
+
 bot = telebot.TeleBot(TOKEN)
 user_progress = {}
 
@@ -73,8 +75,8 @@ def calculate_totem_animal(chat_id):
         bot.send_message(chat_id, 'Не удалось определить ваше тотемное животное. Попробуйте ещё раз!')
 
     markup = telebot.types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
-    markup.add('Да', 'Нет', 'Отправить результаты')
-    bot.send_message(chat_id, 'Желаете пройти викторину снова?', reply_markup=markup)
+    markup.add('Да', 'Нет', 'Поделиться с нами результатами', 'Отправить результаты себе')
+    bot.send_message(chat_id, 'Желаете пройти викторину снова или поделиться результатами?', reply_markup=markup)
 
 
 def send_email(subject, body, to_email):
@@ -92,11 +94,13 @@ def send_email(subject, body, to_email):
         smtp_server.sendmail(from_email, to_email, msg.as_string())
         smtp_server.quit()
         print("Результаты отправлены.")
+        return True
     except Exception as e:
         print(f"Результаты не отправлены. Ошибка: {e}")
+        return False
 
 
-@bot.message_handler(func=lambda message: message.text.lower() in ['да', 'нет', 'отправить результаты'])
+@bot.message_handler(func=lambda message: message.text.lower() in ['да', 'нет', 'поделиться с нами результатами'])
 def handle_replay_quiz(message: telebot.types.Message):
     chat_id = message.chat.id
     user_response = message.text.lower()
@@ -106,15 +110,49 @@ def handle_replay_quiz(message: telebot.types.Message):
     elif user_response == 'нет':
         bot.send_message(chat_id, 'Спасибо за участие, всего доброго!')
         user_progress.pop(chat_id, None)
-    elif user_response == 'отправить результаты':
+    elif user_response == 'поделиться с нами результатами':
         user_scores = user_progress[chat_id]['scores']
         if user_scores:
             totem_animal = max(user_scores, key=user_scores.get)
-            result_text = f'Ваше тотемное животное: {totem_animal}! Вы можете взять его под опеку. Спасибо за участие!'
-            send_email("Результаты вашей викторины", result_text, "evgeniishikunov1998@ya.ru")
-            bot.send_message(chat_id, 'Результаты нам были успешно отправлены!')
+            result_text = f'Участник поделился результатами. Тотемное животное: {totem_animal}!'
+            send_email("Результаты викторины участника", result_text, "evgeniishikunov1998@ya.ru")
+            bot.send_message(chat_id, 'Результаты были нам успешно отправлены!')
+            markup = telebot.types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
+            markup.add('Отправить результаты себе')
+            bot.send_message(chat_id, 'Отправить результаты на вашу почту?', reply_markup=markup)
         else:
             bot.send_message(chat_id, 'Не удалось отправить результаты.')
+            markup = telebot.types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
+            markup.add('Отправить результаты себе')
+            bot.send_message(chat_id, 'Отправить результаты на вашу почту?', reply_markup=markup)
+
+
+@bot.message_handler(func=lambda message: message.text.lower() == 'отправить результаты себе')
+def handle_replay_quiz(message: types.Message):
+    chat_id = message.chat.id
+    bot.reply_to(message, 'Пожалуйста, введите свою почту')
+
+    bot.register_next_step_handler(message, process_email_step)
+
+
+def process_email_step(message: types.Message):
+    chat_id = message.chat.id
+    input_email = message.text
+
+    if 'scores' in user_progress.get(chat_id, {}):
+        user_scores = user_progress[chat_id]['scores']
+        totem_animal = max(user_scores, key=user_scores.get)
+        result_text = (
+            f'Поздравляем с прохождением викторины. Ваше тотемное животное: {totem_animal}!\n\n'
+            f'С наилучшими пожеланиями!'
+        )
+
+        if send_email("Результаты викторины участника", result_text, input_email):
+            bot.send_message(chat_id, f'Результаты на почту {input_email} были отправлены успешно!')
+        else:
+            bot.send_message(chat_id, f'Не удалось отправить результаты на почту {input_email}.')
+    else:
+        bot.send_message(chat_id, 'У вас нет результатов для отправки.')
 
 
 @bot.message_handler(commands=['help'])

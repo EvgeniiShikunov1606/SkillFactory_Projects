@@ -1,9 +1,9 @@
 import random
-
 import telebot
 from extensions import APIException, CryptoConverter
 from config import keys, TOKEN, commands_list
 
+# link to bot - @evgenii_crypto_bot
 
 bot = telebot.TeleBot(TOKEN)
 
