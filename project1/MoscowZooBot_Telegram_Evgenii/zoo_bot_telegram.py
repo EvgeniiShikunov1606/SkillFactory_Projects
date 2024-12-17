@@ -33,7 +33,7 @@ def send_question(chat_id):
         return
 
     current_question_index = user_data.get("current_question", 0)
-    num_options = user_data.get("num_options", 4)  # Default to 4 if not set
+    num_options = user_data.get("num_options", 4)
 
     if current_question_index == 0 and "num_options" not in user_data:
         choice_option_for_user(chat_id)
@@ -116,12 +116,15 @@ def handle_replay_quiz(message: telebot.types.Message):
             totem_animal = max(user_scores, key=user_scores.get)
             result_text = f'Участник поделился результатами. Тотемное животное: {totem_animal}!'
             send_email("Результаты викторины участника", result_text, "evgeniishikunov1998@ya.ru")
-            bot.send_message(chat_id, 'Результаты были нам успешно отправлены!')
+            bot.send_message(chat_id, 'Результаты были нам успешно отправлены на почту '
+                                      'evgeniishikunov1998@ya.ru. Вы также можете отправить '
+                                      'ваши результаты себе.')
             markup = telebot.types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
             markup.add('Отправить результаты себе')
             bot.send_message(chat_id, 'Отправить результаты на вашу почту?', reply_markup=markup)
         else:
-            bot.send_message(chat_id, 'Не удалось отправить результаты.')
+            bot.send_message(chat_id, 'Не удалось отправить результаты нам. Вы можете отправить '
+                                      'результаты себе.')
             markup = telebot.types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
             markup.add('Отправить результаты себе')
             bot.send_message(chat_id, 'Отправить результаты на вашу почту?', reply_markup=markup)
@@ -147,8 +150,13 @@ def process_email_step(message: types.Message):
             f'С наилучшими пожеланиями!'
         )
 
-        if send_email("Результаты викторины участника", result_text, input_email):
-            bot.send_message(chat_id, f'Результаты на почту {input_email} были отправлены успешно!')
+        if send_email('Результаты викторины участника', result_text, input_email):
+            bot.send_message(chat_id, f'Результаты на почту {input_email} были успешно отправлены!\n\n'
+                                      'Благодарим вас за участие. Вы можете воспользоваться командами:\n'
+                                      '/start_quiz - Начать викторину\n'
+                                       '/animals - Посмотреть список животных\n'
+                                       '/guardianship - Подробности о программе опеки над животными\n'
+                                       '/about - О нас')
         else:
             bot.send_message(chat_id, f'Не удалось отправить результаты на почту {input_email}.')
     else:
