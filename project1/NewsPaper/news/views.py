@@ -181,3 +181,23 @@ class TaskView(View):
         post_id = kwargs.get('post_id')
         send_post_notification.delay(post_id)
         return HttpResponse('Задача отправлена в очередь')
+
+
+class MyPostsList(ListView):
+    model = Post
+    template_name = 'flatpages/my_posts.html'
+    context_object_name = 'posts'
+    paginate_by = 10
+    filterset = None
+
+    def get_queryset(self):
+        try:
+            author = Author.objects.get(user=self.request.user)
+            return Post.objects.filter(author=author).order_by('-created_at')
+        except Author.DoesNotExist:
+            return Post.objects.none()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['total_posts'] = self.get_queryset().count()
+        return context

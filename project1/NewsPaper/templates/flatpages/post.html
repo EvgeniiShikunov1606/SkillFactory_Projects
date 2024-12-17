@@ -27,6 +27,7 @@
     </style>
 <table>
     <tr>
+        <th>ID</th>
         <th>Заголовок</th>
         <th>Дата написания</th>
         <th>Содержимое</th>
@@ -35,6 +36,7 @@
         <!-- <td>{{ post.author }}</td>  -->
         <!-- <td>{{ post.type }}</td>  -->
         {% with bad_words="дурак" %}
+            <td style="background-color: #e8efff;">{{ post.id }}</td>
             <td>{{ post.title|censor:bad_words }}</td>
             <td>{{ post.created_at }}</td>
             <td>{{ post.text|censor:bad_words }}</td>
