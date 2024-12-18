@@ -8,6 +8,7 @@ from config import animals_list, TOKEN
 import smtplib
 from email.mime.text import MIMEText
 from telebot import TeleBot, types
+from datetime import datetime
 
 # link to bot - @evgenii_moscow_zoo_bot
 
@@ -92,12 +93,60 @@ def send_email(subject, body, to_email):
         smtp_server = smtplib.SMTP_SSL('smtp.yandex.ru', 465)
         smtp_server.login(from_email, password)
         smtp_server.sendmail(from_email, to_email, msg.as_string())
+
+        time_now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         smtp_server.quit()
-        print("Результаты отправлены.")
+        print(f"{time_now} - Письмо отправлено на {to_email}.")
         return True
     except Exception as e:
-        print(f"Результаты не отправлены. Ошибка: {e}")
+        print(f"Письмо не отправлено на {to_email}. Ошибка: {e}")
         return False
+
+
+def process_email_step(message: types.Message):
+    chat_id = message.chat.id
+    input_email = message.text
+
+    if 'scores' in user_progress.get(chat_id, {}):
+        user_scores = user_progress[chat_id]['scores']
+        totem_animal = max(user_scores, key=user_scores.get)
+        result_text = (
+            f'Поздравляем с прохождением викторины. Ваше тотемное животное: {totem_animal}!\n\n'
+            f'С наилучшими пожеланиями!'
+        )
+
+        if send_email('Результаты викторины участника', result_text, input_email):
+            markup = telebot.types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
+            markup.add('Оставить фидбек')
+            bot.send_message(chat_id, f'Результаты на почту {input_email} были успешно отправлены!\n\n'
+                                      'Благодарим вас за участие. Также вы можете оставить свой фидбек '
+                                      'о викторине по кнопке.\n\n'
+                                      'Воспользоваться командами:\n'
+                                      '/start_quiz - Начать викторину\n'
+                                       '/animals - Посмотреть список животных\n'
+                                       '/guardianship - Подробности о программе опеки над животными\n'
+                                       '/about - О нас\n'
+                                        '/support - Поддержка', reply_markup=markup)
+        else:
+            bot.send_message(chat_id, f'Не удалось отправить результаты на почту {input_email}.')
+    else:
+        bot.send_message(chat_id, 'У вас нет результатов для отправки.')
+
+
+def process_feedback(message: types.Message):
+    chat_id = message.chat.id
+    feedback_text = message.text
+
+    if send_email('Фидбек участника викторины', feedback_text, "evgeniishikunov1998@ya.ru"):
+        bot.send_message(chat_id, f'Ваш фидбек был отправлен. Спасибо!\n\n'
+                                    'Вы можете воспользоваться командами:\n'
+                                    '/start_quiz - Начать викторину\n'
+                                    '/animals - Посмотреть список животных\n'
+                                    '/guardianship - Подробности о программе опеки над животными\n'
+                                    '/about - О нас\n'
+                                    '/support - Поддержка')
+    else:
+        bot.send_message(chat_id, f'Не удалось отправить фидбек.')
 
 
 @bot.message_handler(func=lambda message: message.text.lower() in ['да', 'нет', 'поделиться с нами результатами'])
@@ -108,7 +157,12 @@ def handle_replay_quiz(message: telebot.types.Message):
     if user_response == 'да':
         start_quiz(message)
     elif user_response == 'нет':
-        bot.send_message(chat_id, 'Спасибо за участие, всего доброго!')
+        markup = telebot.types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
+        markup.add('Оставить фидбек')
+        bot.send_message(chat_id, 'Спасибо за участие, всего доброго!\n\n'
+                                  'Пожалуйста, оставьте фидбек по викторине, воспользовавшись'
+                                  'кнопкой. Также вы можете обратиться в поддержку командой /support.',
+                            reply_markup=markup)
         user_progress.pop(chat_id, None)
     elif user_response == 'поделиться с нами результатами':
         user_scores = user_progress[chat_id]['scores']
@@ -133,34 +187,17 @@ def handle_replay_quiz(message: telebot.types.Message):
 @bot.message_handler(func=lambda message: message.text.lower() == 'отправить результаты себе')
 def handle_replay_quiz(message: types.Message):
     chat_id = message.chat.id
-    bot.reply_to(message, 'Пожалуйста, введите свою почту')
+    bot.reply_to(message, 'Пожалуйста, укажите свою почту')
 
     bot.register_next_step_handler(message, process_email_step)
 
 
-def process_email_step(message: types.Message):
+@bot.message_handler(func=lambda message: message.text.lower() == 'оставить фидбек')
+def handle_feedback_quiz(message: types.Message):
     chat_id = message.chat.id
-    input_email = message.text
+    bot.reply_to(message, 'Пожалуйста, введите текст')
 
-    if 'scores' in user_progress.get(chat_id, {}):
-        user_scores = user_progress[chat_id]['scores']
-        totem_animal = max(user_scores, key=user_scores.get)
-        result_text = (
-            f'Поздравляем с прохождением викторины. Ваше тотемное животное: {totem_animal}!\n\n'
-            f'С наилучшими пожеланиями!'
-        )
-
-        if send_email('Результаты викторины участника', result_text, input_email):
-            bot.send_message(chat_id, f'Результаты на почту {input_email} были успешно отправлены!\n\n'
-                                      'Благодарим вас за участие. Вы можете воспользоваться командами:\n'
-                                      '/start_quiz - Начать викторину\n'
-                                       '/animals - Посмотреть список животных\n'
-                                       '/guardianship - Подробности о программе опеки над животными\n'
-                                       '/about - О нас')
-        else:
-            bot.send_message(chat_id, f'Не удалось отправить результаты на почту {input_email}.')
-    else:
-        bot.send_message(chat_id, 'У вас нет результатов для отправки.')
+    bot.register_next_step_handler(message, process_feedback)
 
 
 @bot.message_handler(commands=['help'])
@@ -170,9 +207,53 @@ def command_help(message: telebot.types.Message):
             '/start_quiz - Начать викторину\n'
             '/animals - Посмотреть список животных\n'
             '/guardianship - Подробности о программе опеки над животными\n'
-            '/about - О нас')
+            '/about - О нас\n'
+            '/support - Поддержка')
     with open('pics/MZoo-logo-сircle-mono-black-preview.jpg', 'rb') as photo:
         bot.send_photo(message.chat.id, photo, caption=text)
+
+
+@bot.message_handler(commands=['support'])
+def command_support(message: types.Message):
+    chat_id = message.chat.id
+    bot.reply_to(message, 'Укажите, пожалуйста, вашу почту')
+    bot.register_next_step_handler(message, process_email_support)
+
+
+def process_email_support(message: types.Message):
+    chat_id = message.chat.id
+    email = message.text
+    user_progress[chat_id] = {'email': email}
+    bot.send_message(chat_id, 'Укажите заголовок вашего обращения')
+    bot.register_next_step_handler(message, process_title_support)
+
+
+def process_title_support(message: types.Message):
+    chat_id = message.chat.id
+    title = message.text
+    user_progress[chat_id]['title'] = title
+    bot.send_message(chat_id, 'Введите текст вашего обращения')
+    bot.register_next_step_handler(message, process_message_support)
+
+
+def process_message_support(message: types.Message):
+    chat_id = message.chat.id
+    support_text = message.text
+    email = user_progress[chat_id]['email']
+    title = user_progress[chat_id]['title']
+
+    if send_email(f'{title} - from {email}', support_text, "evgeniishikunov1998@ya.ru"):
+        bot.send_message(chat_id, f'Ваше обращение "{title}" было отправлено в поддержку.\n'
+                                  f'После обработки обращения вам на почту {email} придет ответ.  Спасибо!\n\n'
+                                  'Вы можете воспользоваться командами:\n'
+                                  '/start_quiz - Начать викторину\n'
+                                  '/animals - Посмотреть список животных\n'
+                                  '/guardianship - Подробности о программе опеки над животными\n'
+                                  '/about - О нас')
+    else:
+        bot.send_message(chat_id, 'Ваше обращение не удалось отправить.')
+
+    del user_progress[chat_id]
 
 
 @bot.message_handler(commands=['animals'])
@@ -192,7 +273,7 @@ def send_animal_photo_callback(call: types.CallbackQuery):
         file_path = os.path.join('pics', f'{animal_name}.jpg')
         if os.path.exists(file_path):
             with open(file_path, 'rb') as photo:
-                bot.send_photo(call.message.chat.id, photo, caption=f'{animal_name} ждёт вас!')
+                bot.send_photo(call.message.chat.id, photo, caption=f'{animal_name}')
         else:
             bot.send_message(call.message.chat.id, f'Извините, изображение для {animal_name} не найдено.')
     bot.answer_callback_query(call.id)
@@ -215,7 +296,8 @@ def guardianship(message: telebot.types.Message):
             'воспользуйтесь данными командами:\n'
             '/start_quiz - Начать викторину\n'
             '/animals - Посмотреть список животных\n'
-            '/about - О нас')
+            '/about - О нас\n'
+            '/support - Поддержка')
     with open('pics/MZoo-logo-сircle-mono-black-preview.jpg', 'rb') as photo:
         bot.send_photo(message.chat.id, photo, caption=text)
 
@@ -238,7 +320,8 @@ def about(message: telebot.types.Message):
             'Команды:\n'
             '/start_quiz - Начать викторину\n'
             '/animals - Посмотреть список животных\n'
-            '/guardianship - Подробности о программе опеки над животными\n')
+            '/guardianship - Подробности о программе опеки над животными\n'
+            '/support - Поддержка')
     with open('pics/9083907d-fef0-48ff-a70d-292e2272f329.jpg', 'rb') as photo:
         bot.send_photo(message.chat.id, photo, caption=text)
 
