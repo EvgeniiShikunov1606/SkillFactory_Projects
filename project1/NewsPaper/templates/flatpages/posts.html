@@ -5,7 +5,20 @@
 {% block title %}Posts{% endblock title %}
 <!-- {% block header %}{% endblock header %} --><!-- {% cache 30 content_cache_key %} -->
 {% block content %}
-<h1>Все посты</h1><div class="button-container"><form action="{% url 'news_create' %}" method="get"><input type="submit" value="Написать новость или статью" class="button" /></form><form action="{% url 'post_search' %}" method="get"><input type="submit" value="Найти" class="button" /></form></div><h3>{% current_time '%b %d %Y' %}</h3><p>Постов на странице: {{ posts|length }}</p><p>Общее число постов: {{ total_posts }}</p><hr><style>
+<h1>Все посты</h1>
+<div class="button-container">
+    <form action="{% url 'news_create' %}" method="get">
+        <input type="submit" value="Написать новость или статью" class="button" />
+    </form>
+    <form action="{% url 'post_search' %}" method="get">
+        <input type="submit" value="Найти" class="button" />
+    </form>
+</div>
+<h3>{% current_time '%b %d %Y' %}</h3>
+<p>Постов на странице: {{ posts|length }}</p>
+<p>Общее число постов: {{ total_posts }}</p>
+<hr>
+<style>
     body {
         font-family: Arial, sans-serif;
         line-height: 1.6;
@@ -68,11 +81,28 @@
 </style>
 
 {% if posts %}
-    <table><tr><th>ID</th><th>Автор</th><th>Заголовок</th><th>Дата написания</th><th>Содержимое</th><th>Подробнее</th></tr>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Автор</th>
+            <th>Заголовок</th>
+            <th>Дата написания</th>
+            <th>Содержимое</th>
+            <th>Подробнее</th>
+        </tr>
         {% for post in posts %}
         <tr>
             {% with bad_words="дурак" %}
-            <td style="background-color: #e8efff;">{{ post.id }}</td><td>{{ post.author }}</td><td>{{ post.title|censor:bad_words }}</td><td>{{ post.created_at }}</td><td>{{ post.text|truncatechars:20|censor:bad_words }}</td><td><form action="{% url 'post_detail' post.id %}" method="get"><input type="submit" value="Подробнее" class="button" /></form></td>
+            <td style="background-color: #e8efff;">{{ post.id }}</td>
+            <td>{{ post.author }}</td>
+            <td>{{ post.title|censor:bad_words }}</td>
+            <td>{{ post.created_at }}</td>
+            <td>{{ post.text|truncatechars:20|censor:bad_words }}</td>
+            <td>
+                <form action="{% url 'post_detail' post.id %}" method="get">
+                    <input type="submit" value="Подробнее" class="button" />
+                </form>
+            </td>
             {% endwith %}
         </tr>
         {% endfor %}

@@ -1,11 +1,49 @@
 {% extends 'flatpages/default.html' %}
-
 {% block content %}
-<h1>Удаление поста</h1>
-<hr>
-<form action="" method="post">
+<h1>Удаление поста</h1><hr><style>
+    body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    table {
+        width: 100%;
+        margin-bottom: 20px;
+        border-collapse: collapse;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    table, th, td {
+        border: 1px solid #ddd;
+    }
+    th, td {
+        padding: 12px;
+        text-align: center;
+    }
+    th {
+        background-color: #f4f4f4;
+    }
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+</style><form action="" method="post">
     {% csrf_token %}
     <p>Удаляем "{{ object.title }}"?</p>
     <input type="submit" value="Удалить" />
 </form>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Заголовок</th>
+        <th>Дата написания</th>
+        <th>Содержимое</th>
+    </tr>
+    <tr>
+        <td style="background-color: #e8efff;">{{ object.id }}</td>
+        <td>{{ object.title }}</td>
+        <td>{{ object.created_at }}</td>
+        <td>{{ object.text }}</td>
+    </tr>
+</table>
+
 {% endblock content %}

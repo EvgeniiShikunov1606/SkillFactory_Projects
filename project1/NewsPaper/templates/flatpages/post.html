@@ -9,6 +9,33 @@
         font-family: Arial, sans-serif;
         line-height: 1.6;
     }
+    .button-container {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+    .button {
+        padding: 5px 10px;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-size: 0.9em;
+        margin-bottom: 5px;
+    }
+    .button-delete {
+        background-color: #f08080;
+    }
+    .button-delete:hover {
+        background-color: #e57373;
+    }
+    .button-edit {
+        background-color: #4682b4;
+    }
+    .button-edit:hover {
+        background-color: #5a9bd3;
+    }
     table {
         width: 100%;
         margin-bottom: 20px;
@@ -30,11 +57,31 @@
     tr:nth-child(even) {
         background-color: #f9f9f9;
     }
-</style><table><tr><th>ID</th><th>Заголовок</th><th>Дата написания</th><th>Содержимое</th></tr><tr>
+</style>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Заголовок</th>
+        <th>Дата написания</th>
+        <th>Содержимое</th>
+        <th>Управление</th>
+    </tr>
+    <tr>
         {% with bad_words="дурак" %}
-        <td style="background-color: #e8efff;">{{ post.id }}</td><td>{{ post.title|censor:bad_words }}</td><td>{{ post.created_at }}</td><td>{{ post.text|censor:bad_words }}</td>
+        <td style="background-color: #e8efff;">{{ post.id }}</td>
+        <td>{{ post.title|censor:bad_words }}</td>
+        <td>{{ post.created_at }}</td>
+        <td>{{ post.text|censor:bad_words }}</td>
+        <td>
+            <form action="{% url 'post_delete' post.id %}" method="get" style="display:inline;">
+                <input type="submit" value="Удалить" class="button button-delete" />
+            </form>
+            <form action="{% url 'post_update' post.id %}" method="get" style="display:inline;">
+                <input type="submit" value="Изменить" class="button button-edit" />
+            </form>
+        </td>
         {% endwith %}
-    </tr></table>
-
+    </tr>
+</table>
 {% endblock content %}
 <!-- {% endcache %} -->

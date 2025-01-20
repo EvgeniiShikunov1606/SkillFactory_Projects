@@ -1,11 +1,38 @@
 {% extends 'flatpages/default.html' %}
-
 {% block content %}
 <h1>Создание поста</h1>
 <hr>
-<form action="" method="post">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    form {
+        width: 80%;
+        margin: 0 auto;
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    form p {
+        margin-bottom: 15px;
+    }
+    input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+</style><form action="" method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Создать" />
-</form>
+    <input type="submit" value="Создать" /></form>
+
 {% endblock content %}
