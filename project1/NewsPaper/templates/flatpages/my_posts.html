@@ -2,93 +2,103 @@
 {% load custom_filters %}
 {% load custom_tags %}
 <!-- {% load cache %} -->
-
-{% block title %}
-Posts
-{% endblock title %}
-
-<!-- {% block header %}
-{% endblock header %}
-
-{% cache 30 content_cache_key %} -->
+{% block title %}Posts{% endblock title %}
+<!-- {% block header %}{% endblock header %} --><!-- {% cache 30 content_cache_key %} -->
 {% block content %}
-   <h1>Все мои посты</h1>
-<h3>{% current_time '%b %d %Y' %}</h3>
-<p>Постов на странице: {{ posts|length }}</p>
-<p>Общее число моих постов: {{ total_posts }}</p>
-<hr>
-   <style>
-       table {
+<h1>Все мои посты</h1><h3>{% current_time '%b %d %Y' %}</h3><p>Постов на странице: {{ posts|length }}</p><p>Общее число моих постов: {{ total_posts }}</p><hr><style>
+    body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    table {
         width: 100%;
+        margin-bottom: 20px;
         border-collapse: collapse;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        overflow: hidden;
     }
     table, th, td {
-        border: 1px solid black;
+        border: 1px solid #ddd;
     }
     th, td {
+        padding: 12px;
         text-align: center;
-        padding: 10px;
     }
     th {
-        background-color: #f2f2f2;
+        background-color: #f4f4f4;
+    }
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
     }
     .button-container {
         display: flex;
-        gap: 970px;
+        justify-content: flex-start;
+        margin-bottom: 20px;
     }
+    .button {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin-right: 10px;
+    }
+    .button:hover {
+        background-color: #45a049;
+    }
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+    }
+    .pagination a {
+        margin: 0 5px;
+        padding: 8px 16px;
+        text-decoration: none;
+        background-color: #f4f4f4;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+    .pagination a:hover {
+        background-color: #ddd;
+    }
+</style>
 
-   </style>
+{% if posts %}
+    <table><tr><th>ID</th><th>Автор</th><th>Заголовок</th><th>Дата написания</th><th>Содержимое</th><th>Подробнее</th></tr>
+        {% for post in posts %}
+        <tr>
+            {% with bad_words="дурак" %}
+            <td style="background-color: #e8efff;">{{ post.id }}</td><td>{{ post.author }}</td><td>{{ post.title|censor:bad_words }}</td><td>{{ post.created_at }}</td><td>{{ post.text|truncatechars:20|censor:bad_words }}</td><td><form action="{% url 'post_detail' post.id %}" method="get"><input type="submit" value="Подробнее" class="button" /></form></td>
+            {% endwith %}
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <h2>Постов нет!</h2>
+{% endif %}
 
-   {% if posts %}
-       <table>
-           <tr>
-               <th>ID</th>
-               <th>Автор</th>
-               <!-- <th>Тип статьи</th> -->
-               <!-- <th>Категории</th> -->
-               <th>Заголовок</th>
-               <th>Дата написания</th>
-               <th>Содержимое</th>
-               <!-- <th>Рейтинг</th> -->
-               <th>Подробнее</th>
-           </tr>
-           {% for post in posts %}
-           <tr>
-               {% with bad_words="дурак" %}
-                    <td style="background-color: #e8efff;">{{ post.id }}</td>
-                    <td>{{ post.author }}</td>
-                    <!-- <td>{{ post.type }}</td> -->
-                    <!-- <td>{{ post.categories }}</td> -->
-                    <td>{{ post.title|censor:bad_words }}</td>
-                    <td>{{ post.created_at }}</td>
-                    <td>{{ post.text|truncatechars:20|censor:bad_words }}</td>
-                    <td><div class="button-container">
-    <form action="{% url 'post_detail' post.id %}" method="get" class="left-button">
-        <input type="submit" value="Подробнее" />
-    </form>
-</div></td>
-                {% endwith %}
-               <!-- <td>{{ post.rating }}</td>  -->
-           </tr>
-           {% endfor %}
-       </table>
-   {% else %}
-       <h2>Постов нет!</h2>
-   {% endif %}
-   {% if page_obj.has_previous %}
-       <a href="?{% url_replace page=1 %}">1</a>
-       {% if page_obj.previous_page_number != 1 %}
-           ...
-           <a href="?{% url_replace page=page_obj.previous_page_number %}">{{ page_obj.previous_page_number }}</a>
-       {% endif %}
-   {% endif %}
-   {{ page_obj.number }}
-   {% if page_obj.has_next %}
-       <a href="?{% url_replace page=page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a>
-       {% if paginator.num_pages != page_obj.next_page_number %}
-           ...
-           <a href="?{% url_replace page=page_obj.paginator.num_pages %}">{{ page_obj.paginator.num_pages }}</a>
-       {% endif %}
-   {% endif %}
+<div class="pagination">
+    {% if page_obj.has_previous %}
+        <a href="?{% url_replace page=1 %}">1</a>
+        {% if page_obj.previous_page_number != 1 %}
+            ...
+            <a href="?{% url_replace page=page_obj.previous_page_number %}">{{ page_obj.previous_page_number }}</a>
+        {% endif %}
+    {% endif %}
+    <span>{{ page_obj.number }}</span>
+    {% if page_obj.has_next %}
+        <a href="?{% url_replace page=page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a>
+        {% if paginator.num_pages != page_obj.next_page_number %}
+            ...
+            <a href="?{% url_replace page=page_obj.paginator.num_pages %}">{{ page_obj.paginator.num_pages }}</a>
+        {% endif %}
+    {% endif %}
+</div>
+
 {% endblock content %}
 <!-- {% endcache %} -->

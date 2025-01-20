@@ -1,0 +1,722 @@
+[
+{
+  "model": "news.post",
+  "pk": 2,
+  "fields": {
+    "author": 3,
+    "type": "AR",
+    "created_at": "2024-11-18T08:27:03.443Z",
+    "title": "Статья №1",
+    "text": "Мои поздравления, это первая статья!",
+    "rating": 1
+  }
+},
+{
+  "model": "news.post",
+  "pk": 3,
+  "fields": {
+    "author": 4,
+    "type": "AR",
+    "created_at": "2024-11-18T08:28:55.325Z",
+    "title": "Статья №2 UPD",
+    "text": "Вторая статья! NEW UPD",
+    "rating": -1
+  }
+},
+{
+  "model": "news.post",
+  "pk": 4,
+  "fields": {
+    "author": 3,
+    "type": "NW",
+    "created_at": "2024-11-18T08:29:44.292Z",
+    "title": "Новость №1",
+    "text": "Первая новость!",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 5,
+  "fields": {
+    "author": 6,
+    "type": "AR",
+    "created_at": "2024-11-19T13:19:19.695Z",
+    "title": "Статья четверого юзера",
+    "text": "Новая статья",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 6,
+  "fields": {
+    "author": 8,
+    "type": "NW",
+    "created_at": "2024-11-20T07:49:58.302Z",
+    "title": "Новость от 20.11.2024",
+    "text": "Шестидневка перед Новым годом всё-таки будет — 28 декабря останется рабочим днем. Готовимся!",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 7,
+  "fields": {
+    "author": 7,
+    "type": "AR",
+    "created_at": "2024-11-24T14:06:05.169Z",
+    "title": "Пост от 24.11.2024",
+    "text": "Вышел патч 1.06 для Silent Hill 2",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 8,
+  "fields": {
+    "author": 12,
+    "type": "AR",
+    "created_at": "2024-11-25T17:46:29.012Z",
+    "title": "Новость от 25.11.2024 (UPD)",
+    "text": "Топ игра на PS5 вышедшая в 2024 году, по-моему мнению, это Silent Hill 2.\r\nЭтот пост был обновлен!",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 10,
+  "fields": {
+    "author": 12,
+    "type": "AR",
+    "created_at": "2024-11-25T18:04:18.529Z",
+    "title": "Между Сочи и Турцией запустят паром",
+    "text": "На борту будет все удобства, включая кафе и магазины, а время пути составит 10-12 часов. Билеты начинаются от 6 тысяч рублей, запуск планируется в декабре.\r\n\r\nКруглогодичное морское сообщение ждали обе стороны целых 13 лет.",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 11,
+  "fields": {
+    "author": 12,
+    "type": "NW",
+    "created_at": "2024-11-25T18:08:21.413Z",
+    "title": "Python 3.14.0 alpha 2 released",
+    "text": "Python 3.14 is still in development. This release, 3.14.0a2 is the second of seven planned alpha releases.\r\n\r\nAlpha releases are intended to make it easier to test the current state of new features and bug fixes and to test the release process.\r\n\r\nDuring the alpha phase, features may be added up until the start of the beta phase (2025-05-06) and, if necessary, may be modified or deleted up until the release candidate phase (2025-07-22). Please keep in mind that this is a preview release and its use is not recommended for production environments.",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 12,
+  "fields": {
+    "author": 12,
+    "type": "NW",
+    "created_at": "2024-11-25T18:09:02.599Z",
+    "title": "Цены на кофе близки к рекорду  2011",
+    "text": "По состоянию на 14.21 мск стоимость мартовского фьючерса на арабику выросла на 0,9%, до 3,0483 доллара за фунт, или примерно до 6 720 долларов за тонну.",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 13,
+  "fields": {
+    "author": 12,
+    "type": "AR",
+    "created_at": "2024-11-25T18:12:24.707Z",
+    "title": "Создание AI модели",
+    "text": "Новая разработанная AI модель машинного обучения, такая как обработка естественного языка (NLP), для работы с текстами",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 14,
+  "fields": {
+    "author": 13,
+    "type": "NW",
+    "created_at": "2024-12-02T17:46:39.360Z",
+    "title": "Футбол Серии А",
+    "text": "Состоится футбольный матч \"Рома - Атланта\" 02.12.2024 в 22:35 по московскому времени.",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 15,
+  "fields": {
+    "author": 12,
+    "type": "NW",
+    "created_at": "2024-12-02T17:49:16.634Z",
+    "title": "Футбол Серии А",
+    "text": "Состоится футбольный матч \"Рома - Атланта\" 02.12.2024 в 22:35 по московскому времени.",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 16,
+  "fields": {
+    "author": 12,
+    "type": "NW",
+    "created_at": "2024-12-02T17:50:45.202Z",
+    "title": "Футбол Серии А",
+    "text": "Состоится футбольный матч \"Рома - Атланта\" 02.12.2024 в 22:35 по московскому времени.",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 17,
+  "fields": {
+    "author": 14,
+    "type": "AR",
+    "created_at": "2024-12-02T17:53:01.988Z",
+    "title": "Продукты для приготовления эчпочмака",
+    "text": "Продукты\r\nМука - 5-6 стаканов (около 1 кг)\r\nВода - 2 стакана\r\nЯйца (в т.ч. яйцо для смазывания) - 2-3 шт.\r\nМасло топлёное - 2 ст. ложки\r\nСоль - 1 ч. ложка\r\n*\r\nДля начинки:\r\nМясо - 300 г\r\nКартофель сырой - 350 г\r\nЛук репчатый - 3 шт.\r\nМасло топлёное - 0,5 стакана\r\nСоль - 1 ч. ложка (по вкусу)\r\nПерец - 0,5 ч. ложки (по вкусу)\r\nБульон мясной - 0,5-1 стакан",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 18,
+  "fields": {
+    "author": 15,
+    "type": "NW",
+    "created_at": "2024-12-02T18:23:34.608Z",
+    "title": "Delisuonal",
+    "text": "Новая песня Delisuonal",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 19,
+  "fields": {
+    "author": 12,
+    "type": "NW",
+    "created_at": "2024-12-05T11:16:33.967Z",
+    "title": "Новость от 05.12.2024",
+    "text": "В 14:16 по московскому времени Биткоин стоит 102348 долларов",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 20,
+  "fields": {
+    "author": 12,
+    "type": "NW",
+    "created_at": "2024-12-05T11:18:37.879Z",
+    "title": "Red Dead Redemption 2",
+    "text": "Игра, которую можно перепроходить несколько раз",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 21,
+  "fields": {
+    "author": 12,
+    "type": "NW",
+    "created_at": "2024-12-06T06:44:39.942Z",
+    "title": "Сегодня отмечается День лентяя",
+    "text": "Праздновать его нужно, не напрягаясь",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 22,
+  "fields": {
+    "author": 16,
+    "type": "NW",
+    "created_at": "2024-12-06T06:59:22.153Z",
+    "title": "День рождения Санта-Клауса",
+    "text": "6 декабря празднуется День рождения Санта-Клауса",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 23,
+  "fields": {
+    "author": 16,
+    "type": "AR",
+    "created_at": "2024-12-06T07:33:30.363Z",
+    "title": "Тестовая новость",
+    "text": "Проверяем работоспособность отправки письма на почту при публикации статьи",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 24,
+  "fields": {
+    "author": 16,
+    "type": "NW",
+    "created_at": "2024-12-06T07:48:07.003Z",
+    "title": "Вторая тестовая новость",
+    "text": "Повторная проверка отправки письма на почту при создании уже новости",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 25,
+  "fields": {
+    "author": 12,
+    "type": "AR",
+    "created_at": "2024-12-06T08:55:11.933Z",
+    "title": "Третья статья",
+    "text": "Третье тестирование рассылки письма на почту при публикации новой статьи",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 26,
+  "fields": {
+    "author": 12,
+    "type": "AR",
+    "created_at": "2024-12-06T10:56:08.916Z",
+    "title": "Статья с категорией",
+    "text": "Тестовая статья с категорией \"Кулинария\"",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 27,
+  "fields": {
+    "author": 17,
+    "type": "AR",
+    "created_at": "2024-12-06T11:40:20.053Z",
+    "title": "Статья jilol64653",
+    "text": "Тестовая статья пользователя для проверки отправки письма на почту после публикации статьи",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 28,
+  "fields": {
+    "author": 12,
+    "type": "AR",
+    "created_at": "2024-12-06T11:43:01.521Z",
+    "title": "Статья evgenii",
+    "text": "Тестовая статья evgenii для проверки отправки письма",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 29,
+  "fields": {
+    "author": 12,
+    "type": "AR",
+    "created_at": "2024-12-06T11:45:27.281Z",
+    "title": "Новость evgenii",
+    "text": "Опять тестовая новость для проверки отправки письма",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 30,
+  "fields": {
+    "author": 12,
+    "type": "NW",
+    "created_at": "2024-12-06T11:51:16.873Z",
+    "title": "Образование от evgenii",
+    "text": "Тестовая новость для категории Образование для проверки отправки письма на почту",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 31,
+  "fields": {
+    "author": 16,
+    "type": "AR",
+    "created_at": "2024-12-06T11:53:22.575Z",
+    "title": "Новость от evgeniishikunov1998",
+    "text": "Проверяем отправку письма всем подписчикам рассылки Спорт",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 32,
+  "fields": {
+    "author": 18,
+    "type": "AR",
+    "created_at": "2024-12-06T12:42:57.199Z",
+    "title": "Новая статья про музыку",
+    "text": "Пользователь nemipil891 любит композиции Тейлор Свифт",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 33,
+  "fields": {
+    "author": 12,
+    "type": "AR",
+    "created_at": "2024-12-06T12:57:06.265Z",
+    "title": "Статья про Papa Roach",
+    "text": "Если вы любите композиции Papa Roach, то подписывайтесь на категорию Музыка!",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 34,
+  "fields": {
+    "author": 19,
+    "type": "AR",
+    "created_at": "2024-12-06T13:09:38.572Z",
+    "title": "Первая ежедневная статья",
+    "text": "Это проверка достижения ежедневного лимита написания статей. Это первая статья!",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 35,
+  "fields": {
+    "author": 19,
+    "type": "AR",
+    "created_at": "2024-12-06T13:09:57.064Z",
+    "title": "Первая ежедневная статья",
+    "text": "Это проверка достижения ежедневного лимита написания статей. Это первая статья!",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 36,
+  "fields": {
+    "author": 19,
+    "type": "AR",
+    "created_at": "2024-12-06T13:10:41.582Z",
+    "title": "Первая ежедневная статья",
+    "text": "Это проверка достижения ежедневного лимита написания статей. Это первая статья!",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 37,
+  "fields": {
+    "author": 19,
+    "type": "AR",
+    "created_at": "2024-12-06T13:11:47.971Z",
+    "title": "Первая ежедневная статья",
+    "text": "Это проверка достижения ежедневного лимита написания статей. Это первая статья!",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 38,
+  "fields": {
+    "author": 12,
+    "type": "AR",
+    "created_at": "2024-12-10T13:47:14.286Z",
+    "title": "Проверка рассылки",
+    "text": "Проверка рассылки письма подписчиком с уведомлением о публикации нового поста из категории",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 39,
+  "fields": {
+    "author": 12,
+    "type": "AR",
+    "created_at": "2024-12-10T14:15:55.310Z",
+    "title": "Проверка рассылки",
+    "text": "Очередная проверка рассылки письма подписчикам категории. Ух-ху-хууу",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 40,
+  "fields": {
+    "author": 12,
+    "type": "AR",
+    "created_at": "2024-12-11T13:21:07.904Z",
+    "title": "Сейчас посмотрим",
+    "text": "Посмотрим, что тут у нас? Работает ли рассылка писем подписчикам? Надеюсь!",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 41,
+  "fields": {
+    "author": 12,
+    "type": "AR",
+    "created_at": "2024-12-11T13:24:32.262Z",
+    "title": "Повторная попытка",
+    "text": "Посмотрим, что тут у нас? Работает ли рассылка писем подписчикам? Надеюсь!",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 42,
+  "fields": {
+    "author": 12,
+    "type": "AR",
+    "created_at": "2024-12-11T13:24:48.287Z",
+    "title": "Повторная попытка",
+    "text": "Посмотрим, что тут у нас? Работает ли рассылка писем подписчикам? Надеюсь!",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 43,
+  "fields": {
+    "author": 16,
+    "type": "NW",
+    "created_at": "2024-12-11T13:30:38.952Z",
+    "title": "Новый альбом Slipknot?",
+    "text": "Поговаривают, что в закромах группы Slipknot уже готов альбом, записанный около 15 лет назад. Надеемся, что рано или поздно люди смогут его послушать!",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 44,
+  "fields": {
+    "author": 16,
+    "type": "AR",
+    "created_at": "2024-12-12T11:27:42.417Z",
+    "title": "Новый альбом Taylor Swift",
+    "text": "Интересно, когда выйдет новый альбом Taylor Swift?",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 45,
+  "fields": {
+    "author": 16,
+    "type": "AR",
+    "created_at": "2024-12-12T11:58:17.193Z",
+    "title": "Новый альбом Taylor Swift",
+    "text": "Интересно, когда выйдет новый альбом Taylor Swift?",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 46,
+  "fields": {
+    "author": 16,
+    "type": "NW",
+    "created_at": "2024-12-12T12:21:11.185Z",
+    "title": "Новый альбом CMFT",
+    "text": "Полагаю, Кори Тейлор в 2025 году должен порадовать фанатов своим новым альбомом CMFT!",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 47,
+  "fields": {
+    "author": 12,
+    "type": "AR",
+    "created_at": "2024-12-12T12:33:38.091Z",
+    "title": "Новый альбом Kesha",
+    "text": "Скорее всего и у Кеши в 2025 выйдет новый альбом. Ждем!",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 48,
+  "fields": {
+    "author": 12,
+    "type": "AR",
+    "created_at": "2024-12-12T12:40:14.409Z",
+    "title": "Новый альбом Katy Perry",
+    "text": "В 2024 году вышел потрясающий альбом Katy Perry - 143.",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 49,
+  "fields": {
+    "author": 12,
+    "type": "NW",
+    "created_at": "2024-12-12T12:54:22.626Z",
+    "title": "Новый альбом Katy Perry",
+    "text": "В 2024 году вышел потрясающий альбом Katy Perry - 143.",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 50,
+  "fields": {
+    "author": 12,
+    "type": "AR",
+    "created_at": "2024-12-12T13:02:21.207Z",
+    "title": "Новый альбом Katy Perry",
+    "text": "В 2024 году вышел потрясающий альбом Katy Perry - 143.",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 51,
+  "fields": {
+    "author": 12,
+    "type": "AR",
+    "created_at": "2024-12-12T13:10:47.458Z",
+    "title": "Новый альбом Katy Perry",
+    "text": "В 2024 году вышел потрясающий альбом Katy Perry - 143.",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 52,
+  "fields": {
+    "author": 16,
+    "type": "AR",
+    "created_at": "2024-12-12T13:12:17.056Z",
+    "title": "Taylor Swift",
+    "text": "Будет ли новый альбом Taylor Swift в 2025? Надеемся!",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 53,
+  "fields": {
+    "author": 16,
+    "type": "AR",
+    "created_at": "2024-12-12T13:24:42.700Z",
+    "title": "Тейлор Свифт",
+    "text": "Будет ли новый альбом Taylor Swift в 2025? Надеемся!",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 54,
+  "fields": {
+    "author": 16,
+    "type": "NW",
+    "created_at": "2024-12-12T13:28:45.061Z",
+    "title": "Тейлор Свифт!",
+    "text": "Будет ли новый альбом Taylor Swift в 2025? Надеемся!",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 55,
+  "fields": {
+    "author": 16,
+    "type": "AR",
+    "created_at": "2024-12-12T13:34:37.357Z",
+    "title": "Taylor Swift!",
+    "text": "Будет ли новый альбом Taylor Swift в 2025? Надеемся!",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 56,
+  "fields": {
+    "author": 16,
+    "type": "AR",
+    "created_at": "2024-12-12T13:38:32.122Z",
+    "title": "Taylor Swift",
+    "text": "Будет ли новый альбом Taylor Swift в 2025? Надеемся!",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 57,
+  "fields": {
+    "author": 16,
+    "type": "AR",
+    "created_at": "2024-12-12T13:47:03.494Z",
+    "title": "Тестовая тема",
+    "text": "Это тестовое сообщение, здесь нет ничего важного",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 58,
+  "fields": {
+    "author": 12,
+    "type": "NW",
+    "created_at": "2024-12-13T08:33:11.862Z",
+    "title": "Международный праздник живота",
+    "text": "Сегодня отмечается Международный праздник живота — в этот день можно смело наслаждаться любимой едой в неограниченных количествах, и никто не вправе вас осудить.",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 59,
+  "fields": {
+    "author": 12,
+    "type": "NW",
+    "created_at": "2024-12-13T08:37:00.962Z",
+    "title": "Пятница 13-е",
+    "text": "Также сегодня — пятница 13-е, ретроградный Меркурий, наложенный на ретроградный Марс, и горящие дедлайны.\r\n\r\nВесь мир против того, чтобы идти на работу.",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 60,
+  "fields": {
+    "author": 12,
+    "type": "NW",
+    "created_at": "2024-12-13T08:39:30.703Z",
+    "title": "Международный праздник живота",
+    "text": "Сегодня отмечается Международный праздник живота — в этот день можно смело наслаждаться любимой едой в неограниченных количествах, и никто не вправе вас осудить.",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 61,
+  "fields": {
+    "author": 12,
+    "type": "NW",
+    "created_at": "2024-12-13T08:41:00.649Z",
+    "title": "Международный праздник живота",
+    "text": "Сегодня отмечается Международный праздник живота — в этот день можно смело наслаждаться любимой едой в неограниченных количествах, и никто не вправе вас осудить.",
+    "rating": 0
+  }
+},
+{
+  "model": "news.post",
+  "pk": 64,
+  "fields": {
+    "author": 20,
+    "type": "AR",
+    "created_at": "2024-12-16T13:27:52.483Z",
+    "title": "Harry Kane",
+    "text": "Harry Kane - \"Головная боль\" для защиты. В одном из матчей на 38-ой минуте на его счету был уже один гол, 5 ударов, 3 из которых в створ и 2 по воротам.",
+    "rating": 0
+  }
+}
+]

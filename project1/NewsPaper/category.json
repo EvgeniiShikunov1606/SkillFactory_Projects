@@ -1,0 +1,68 @@
+[
+{
+  "model": "news.category",
+  "pk": 1,
+  "fields": {
+    "name": "Кулинария",
+    "subscribers": [
+      7,
+      33,
+      39,
+      40,
+      41,
+      42,
+      43
+    ]
+  }
+},
+{
+  "model": "news.category",
+  "pk": 2,
+  "fields": {
+    "name": "Музыка",
+    "subscribers": [
+      7,
+      33,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43
+    ]
+  }
+},
+{
+  "model": "news.category",
+  "pk": 3,
+  "fields": {
+    "name": "Образование",
+    "subscribers": [
+      7,
+      33,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43
+    ]
+  }
+},
+{
+  "model": "news.category",
+  "pk": 4,
+  "fields": {
+    "name": "Спорт",
+    "subscribers": [
+      7,
+      33,
+      39,
+      40,
+      41,
+      42,
+      43
+    ]
+  }
+}
+]

@@ -1,48 +1,40 @@
 {% extends 'flatpages/default.html' %}
 {% load custom_filters %}
 <!-- {% load cache %} -->
-
 {% block title %}Post{% endblock title %}
-
-<!-- {% block header %}
-{% endblock header %}
-
-{% cache 30 content_cache_key %} -->
+<!-- {% block header %}{% endblock header %} --><!-- {% cache 30 content_cache_key %} -->
 {% block content %}
-    <h1>Детали "{{ post }}"</h1><style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid black;
-        }
-        th, td {
-            text-align: center;
-            padding: 10px;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Заголовок</th>
-        <th>Дата написания</th>
-        <th>Содержимое</th>
-    </tr>
-    <tr>
-        <!-- <td>{{ post.author }}</td>  -->
-        <!-- <td>{{ post.type }}</td>  -->
+<h1>Детали "{{ post }}"</h1><style>
+    body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    table {
+        width: 100%;
+        margin-bottom: 20px;
+        border-collapse: collapse;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    table, th, td {
+        border: 1px solid #ddd;
+    }
+    th, td {
+        padding: 12px;
+        text-align: center;
+    }
+    th {
+        background-color: #f4f4f4;
+    }
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+</style><table><tr><th>ID</th><th>Заголовок</th><th>Дата написания</th><th>Содержимое</th></tr><tr>
         {% with bad_words="дурак" %}
-            <td style="background-color: #e8efff;">{{ post.id }}</td>
-            <td>{{ post.title|censor:bad_words }}</td>
-            <td>{{ post.created_at }}</td>
-            <td>{{ post.text|censor:bad_words }}</td>
+        <td style="background-color: #e8efff;">{{ post.id }}</td><td>{{ post.title|censor:bad_words }}</td><td>{{ post.created_at }}</td><td>{{ post.text|censor:bad_words }}</td>
         {% endwith %}
-        <!-- <td>{{ post.rating }}</td>  -->
-    </tr>
-</table>
+    </tr></table>
+
 {% endblock content %}
 <!-- {% endcache %} -->

@@ -1,7 +1,5 @@
-from datetime import datetime
 from django.contrib.auth.models import User
 from django.db import models
-from django.urls import reverse
 from django.core.cache import cache
 
 
@@ -14,15 +12,25 @@ class Author(models.Model):
 
     def update_rating(self):
         post_rating = sum(post.rating * 3 for post in self.post_set.all())
-        comment_rating = sum(comment.rating for comment in Comment.objects.filter(user_id=self.user))
-        comment_post_rating = sum(comment.rating for comment in Comment.objects.filter(post__author=self))
+        comment_rating = sum(
+            comment.rating
+            for comment in Comment.objects.filter(user_id=self.user)
+        )
+
+        comment_post_rating = sum(
+            comment.rating
+            for comment in Comment.objects.filter(post__author=self)
+        )
         self.rating = post_rating + comment_rating + comment_post_rating
         self.save()
 
 
 class Category(models.Model):
     name = models.CharField(max_length=50, unique=True)
-    subscribers = models.ManyToManyField(User, related_name='subscribed_categories')
+    subscribers = models.ManyToManyField(
+        User,
+        related_name='subscribed_categories'
+    )
 
     def __str__(self):
         return self.name
@@ -37,7 +45,11 @@ class Post(models.Model):
     )
 
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
-    type = models.CharField(max_length=2, choices=TYPE_CHOICES, default=ARTICLE)
+    type = models.CharField(
+        max_length=2,
+        choices=TYPE_CHOICES,
+        default=ARTICLE
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     categories = models.ManyToManyField(Category, through='PostCategory')
     title = models.CharField(max_length=128)
