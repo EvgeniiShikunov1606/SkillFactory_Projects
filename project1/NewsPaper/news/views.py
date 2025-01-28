@@ -20,6 +20,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 from .tasks import send_post_notification
 from django.core.cache import cache
+from django.utils.translation import gettext as _
 
 
 class PostsList(ListView):
@@ -129,9 +130,16 @@ class PostUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
 
 
 class PostDelete(DeleteView):
+    permission_required = 'news.change_post'
     model = Post
     template_name = 'post_delete.html'
     success_url = reverse_lazy('posts_list')
+
+    def dispatch(self, request, *args, **kwargs):
+        post = self.get_object()
+        if post.author.user != request.user or not request.user.groups.filter(name='authors').exists():
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
 
 
 class SearchPostsView(ListView):
@@ -201,3 +209,10 @@ class MyPostsList(ListView):
         context = super().get_context_data(**kwargs)
         context['total_posts'] = self.get_queryset().count()
         return context
+
+
+class Index(View):
+    def get(self, request):
+        string = _('Hello world')
+
+        return HttpResponse(string)

@@ -1,22 +1,42 @@
 {% extends 'flatpages/default.html' %}
 {% load custom_filters %}
 {% load custom_tags %}
+{% load i18n %}
+
 <!-- {% load cache %} -->
 {% block title %}Posts{% endblock title %}
 <!-- {% block header %}{% endblock header %} --><!-- {% cache 30 content_cache_key %} -->
 {% block content %}
-<h1>Все посты</h1>
+<h1>{% trans "Все посты" %}</h1>
+
 <div class="button-container">
-    <form action="{% url 'news_create' %}" method="get">
-        <input type="submit" value="Написать новость или статью" class="button" />
+    <form action="{% url 'news_create' %}" method="get" class="button-left">
+        <input type="submit" value="{% trans 'Написать новость или статью' %}" class="button" />
     </form>
-    <form action="{% url 'post_search' %}" method="get">
-        <input type="submit" value="Найти" class="button" />
+    <form action="{% url 'set_language' %}" method="POST" class="language-selector">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ redirect_to }}"><select name="language" id="">
+        {% get_available_languages as LANGUAGES %}
+        {% get_language_info_list for LANGUAGES as languages %}
+        {% get_current_language as LANGUAGE_CODE %}
+        {% for language in languages %}
+            {% if language.code in "ru,en,es" %}
+                <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %} selected {% endif %}>
+                    {{ language.name_local }} - {{ language.code }}
+                </option>
+            {% endif %}
+        {% endfor %}
+    </select>
+        <input type="submit" value="{% trans 'Установить' %}" class="button" />
+    </form>
+    {{ string }}
+    <form action="{% url 'post_search' %}" method="get" class="button-right">
+        <input type="submit" value="{% trans 'Найти' %}" class="button" />
     </form>
 </div>
 <h3>{% current_time '%b %d %Y' %}</h3>
-<p>Постов на странице: {{ posts|length }}</p>
-<p>Общее число постов: {{ total_posts }}</p>
+<p>{% trans "Постов на странице" %}: {{ posts|length }}</p>
+<p>{% trans "Общее число постов" %}: {{ total_posts }}</p>
 <hr>
 <style>
     body {
@@ -83,12 +103,12 @@
 {% if posts %}
     <table>
         <tr>
-            <th>ID</th>
-            <th>Автор</th>
-            <th>Заголовок</th>
-            <th>Дата написания</th>
-            <th>Содержимое</th>
-            <th>Подробнее</th>
+            <th>{% trans "ID" %}</th>
+            <th>{% trans "Автор" %}</th>
+            <th>{% trans "Заголовок" %}</th>
+            <th>{% trans "Дата написания" %}</th>
+            <th>{% trans "Содержимое" %}</th>
+            <th>{% trans "Подробнее" %}</th>
         </tr>
         {% for post in posts %}
         <tr>
@@ -100,7 +120,7 @@
             <td>{{ post.text|truncatechars:20|censor:bad_words }}</td>
             <td>
                 <form action="{% url 'post_detail' post.id %}" method="get">
-                    <input type="submit" value="Подробнее" class="button" />
+                    <input type="submit" value="{% trans 'Подробнее' %}" class="button" />
                 </form>
             </td>
             {% endwith %}
@@ -108,7 +128,7 @@
         {% endfor %}
     </table>
 {% else %}
-    <h2>Постов нет!</h2>
+    <h2>{% trans "Постов нет!" %}</h2>
 {% endif %}
 
 <div class="pagination">

@@ -1,10 +1,17 @@
 {% extends 'flatpages/default.html' %}
 {% load custom_filters %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Post{% endblock title %}</title>
+</head>
+<body>
 <!-- {% load cache %} -->
-{% block title %}Post{% endblock title %}
 <!-- {% block header %}{% endblock header %} --><!-- {% cache 30 content_cache_key %} -->
 {% block content %}
-<h1>Детали "{{ post }}"</h1>
+<h1>{% trans "Детали" %} "{{ post }}"</h1>
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -61,11 +68,11 @@
 </style>
 <table>
     <tr>
-        <th>ID</th>
-        <th>Заголовок</th>
-        <th>Дата написания</th>
-        <th>Содержимое</th>
-        <th>Управление</th>
+        <th>{% trans "ID" %}</th>
+        <th>{% trans "Заголовок" %}</th>
+        <th>{% trans "Дата написания" %}</th>
+        <th>{% trans "Содержимое" %}</th>
+        <th>{% trans "Управление" %}</th>
     </tr>
     <tr>
         {% with bad_words="дурак" %}
@@ -75,10 +82,10 @@
         <td>{{ post.text|censor:bad_words }}</td>
         <td>
             <form action="{% url 'post_delete' post.id %}" method="get" style="display:inline;">
-                <input type="submit" value="Удалить" class="button button-delete" />
+                <input type="submit" value='{% trans "Удалить" %}' class="button button-delete" />
             </form>
             <form action="{% url 'post_update' post.id %}" method="get" style="display:inline;">
-                <input type="submit" value="Изменить" class="button button-edit" />
+                <input type="submit" value='{% trans "Изменить" %}' class="button button-edit" />
             </form>
         </td>
         {% endwith %}

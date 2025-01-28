@@ -1,6 +1,7 @@
 {% extends 'flatpages/default.html' %}
 {% block content %}
-<h1>Создание поста</h1>
+{% load i18n %}
+<h1>{% trans "Создание поста" %}</h1>
 <hr>
 <style>
     body {
@@ -34,6 +35,6 @@
 <form action="" method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Создать" /></form>
+    <input type="submit" value="{% trans 'Создать' %}" /></form>
 
 {% endblock content %}

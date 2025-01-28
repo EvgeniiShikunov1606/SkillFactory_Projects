@@ -1,6 +1,7 @@
 {% extends 'flatpages/default.html' %}
 {% load custom_filters %}
 {% load custom_tags %}
+{% load i18n %}
 
 {% block title %}
 Posts
@@ -8,28 +9,28 @@ Posts
 
 {% block content %}
 
-<h1>Поиск новостей</h1>
+<h1>{% trans "Поиск новостей" %}</h1>
    <form action="" method="get">
-       <label for="author">Автор:</label>
+       <label for="author">{% trans "Автор" %}:</label>
         {{ filterset.form.author }}
 
-        <label for="title">Заголовок:</label>
+        <label for="title">{% trans "Заголовок" %}:</label>
         {{ filterset.form.title }}
 
-        <label for="text">Содержимое:</label>
+        <label for="text">{% trans "Содержимое" %}:</label>
         {{ filterset.form.text }}
 
-        <label for="created_at__lte">По дату:</label>
+        <label for="created_at__lte">{% trans "По дату" %}:</label>
         {{ filterset.form.created_at__lte }}
 
-    <input type="submit" value="Найти" />
+    <input type="submit" value="{% trans 'Найти' %}" />
 </form>
 <form action="{% url 'posts_list' %}" method="get">
-    <input type="submit" value="Вернуться" />
+    <input type="submit" value="{% trans 'Вернуться' %}" />
 </form>
    <h3>{% current_time '%b %d %Y' %}</h3>
-    <p>Постов на странице: {{ posts|length }}</p>
-   <p>Общее число постов: {{ total_posts }}</p>
+    <p>{% trans "Постов на странице" %}: {{ posts|length }}</p>
+   <p>{% trans "Общее число постов" %}: {{ total_posts }}</p>
    <hr>
 
    <style>
@@ -53,11 +54,11 @@ Posts
    {% if posts %}
        <table>
            <tr>
-               <th>Автор</th>
-               <th>Тип статьи</th>
-               <th>Заголовок</th>
-               <th>Дата написания</th>
-               <th>Содержимое</th>
+               <th>{% trans "Автор" %}</th>
+               <th>{% trans "Тип статьи" %}</th>
+               <th>{% trans "Заголовок" %}</th>
+               <th>{% trans "Дата написания" %}</th>
+               <th>{% trans "Содержимое" %}</th>
                <!-- <th>Рейтинг</th> -->
            </tr>
            {% for post in posts %}
@@ -74,7 +75,7 @@ Posts
            {% endfor %}
        </table>
    {% else %}
-       <h2>Постов нет!</h2>
+       <h2>{% trans "Постов нет!" %}</h2>
    {% endif %}
    {% if page_obj.has_previous %}
        <a href="?{% url_replace page=1 %}">1</a>

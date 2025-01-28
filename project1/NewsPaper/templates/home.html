@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+{% load i18n %}
 <html lang="en">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Bare - Start Bootstrap Template</title>
+        <title>News Paper</title>
         {% load static %}
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
@@ -14,7 +15,7 @@
         <!-- Responsive navbar-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
    <div class="container">
-       <a class="navbar-brand" href="#">Django flatpages</a>
+       <a class="navbar-brand" href="#">News Paper</a>
        <button class="navbar-toggler" type="button" data-toggle="collapse"
                data-target="#navbarResponsive"
                aria-controls="navbarResponsive" aria-expanded="false"
@@ -25,29 +26,29 @@
            <ul class="navbar-nav ml-auto">
                <li class="nav-item active">
                    <a class="nav-link" href="#">Home
-                       <span class="sr-only">(current)</span>
+                       <span class="sr-only"></span>
                    </a>
                </li>
                <li class="nav-item">
                    <a class="nav-link" href="/admin/">Admin</a>
                </li>
                <li class="nav-item">
-                   <a class="nav-link" href="/posts/">Posts</a>
+                   <a class="nav-link" href="/posts/">{% trans "Все посты" %}</a>
                </li>
                <li class="nav-item">
-                   <a class="nav-link" href="/my_posts/">My posts</a>
+                   <a class="nav-link" href="/my_posts/">{% trans "Мои посты" %}</a>
                </li>
                <li class="nav-item">
-                   <a class="nav-link" href="/posts/category/1/">Subscribe</a>
+                   <a class="nav-link" href="/posts/category/1/">{% trans "Подписчики" %}</a>
                </li>
                <li class="nav-item">
-                   <a class="nav-link" href="/profile/">Profile</a>
+                   <a class="nav-link" href="/profile/">{% trans "Профиль" %}</a>
                </li>
                <li class="nav-item">
-                   <a class="nav-link" href="/accounts/login/">Login</a>
+                   <a class="nav-link" href="/accounts/login/">{% trans "Авторизоваться" %}</a>
                </li>
                <li class="nav-item">
-                   <a class="nav-link" href="/accounts/logout/">Logout</a>
+                   <a class="nav-link" href="/accounts/logout/">{% trans "Выйти" %}</a>
                </li>
            </ul>
        </div>

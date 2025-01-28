@@ -1,5 +1,5 @@
 {% extends 'flatpages/default.html' %}
-
+{% load i18n %}
 {% block title %}
     {{ flatpage.title }}
 {% endblock title %}
@@ -7,6 +7,6 @@
 {% block content %}
     <h2>{{ flatpage.title }}</h2>
         <hr>
-            <h3>Контент:</h3>
+            <h3>{% trans "Контент" %}:</h3>
                 <div>{{ flatpage.content }}</div>
 {% endblock content %}

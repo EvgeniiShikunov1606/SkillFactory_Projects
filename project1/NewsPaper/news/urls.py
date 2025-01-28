@@ -17,4 +17,5 @@ urlpatterns = [
     path('category/<int:pk>/', CategoryDetailView.as_view(), name='category_detail'),
     path('category/<int:pk>/subscribe/', subscribe_to_category, name='subscribe_to_category'),
     path('task/<int:post_id>/', TaskView.as_view(), name='task'),
+    path('i18n/', include('django.conf.urls.i18n')),
 ]

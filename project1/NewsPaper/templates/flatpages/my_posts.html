@@ -1,14 +1,15 @@
 {% extends 'flatpages/default.html' %}
 {% load custom_filters %}
 {% load custom_tags %}
+{% load i18n %}
 <!-- {% load cache %} -->
 {% block title %}Posts{% endblock title %}
 <!-- {% block header %}{% endblock header %} --><!-- {% cache 30 content_cache_key %} -->
 {% block content %}
-<h1>Все мои посты</h1>
+<h1>{% trans "Все мои посты" %}</h1>
 <h3>{% current_time '%b %d %Y' %}</h3>
-<p>Постов на странице: {{ posts|length }}</p>
-<p>Общее число моих постов: {{ total_posts }}</p>
+<p>{% trans "Постов на странице" %}: {{ posts|length }}</p>
+<p>{% trans "Общее число моих постов" %}: {{ total_posts }}</p>
 <hr>
 <style>
     body {
@@ -76,12 +77,12 @@
 {% if posts %}
     <table>
         <tr>
-            <th>ID</th>
-            <th>Автор</th>
-            <th>Заголовок</th>
-            <th>Дата написания</th>
-            <th>Содержимое</th>
-            <th>Подробнее</th>
+            <th>{% trans "ID" %}</th>
+            <th>{% trans "Автор" %}</th>
+            <th>{% trans "Заголовок" %}</th>
+            <th>{% trans "Дата написания" %}</th>
+            <th>{% trans "Содержимое" %}</th>
+            <th>{% trans "Подробнее" %}</th>
         </tr>
         {% for post in posts %}
         <tr>
@@ -93,7 +94,7 @@
             <td>{{ post.text|truncatechars:20|censor:bad_words }}</td>
             <td>
                 <form action="{% url 'post_detail' post.id %}" method="get">
-                    <input type="submit" value="Подробнее" class="button" />
+                    <input type="submit" value="{% trans 'Подробнее' %}" class="button" />
                 </form>
             </td>
             {% endwith %}
@@ -101,7 +102,7 @@
         {% endfor %}
     </table>
 {% else %}
-    <h2>Постов нет!</h2>
+    <h2>{% trans "Постов нет!" %}</h2>
 {% endif %}
 
 <div class="pagination">

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load i18n %}
 <html lang="en">
 <head>
     {% load static %}
@@ -10,9 +11,9 @@
 <body>
     <div class="header">
     <div class="header-content">
-        <h1><a href="/posts/">Новости</a></h1>
+        <h1><a href="/posts/">{% trans "Вернуться к новостям" %}</a></h1>
         <div class="user-menu">
-            <span>Здравствуйте, {{ user.username }}. Как дела?</span>
+            <span>{% trans "Здравствуйте" %}, {{ user.username }}. {% trans "Как дела?" %}</span>
         </div>
     </div>
 </div>

@@ -1,11 +1,13 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.core.cache import cache
+from django.utils.translation import gettext as _
+from django.utils.translation import pgettext_lazy
 
 
 class Author(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    rating = models.IntegerField(default=0)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, help_text=_('author'))
+    rating = models.IntegerField(default=0, help_text=_('rating'))
 
     def __str__(self):
         return f'{self.user}'
@@ -26,7 +28,7 @@ class Author(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=50, unique=True)
+    name = models.CharField(max_length=50, unique=True, help_text=_('category name'))
     subscribers = models.ManyToManyField(
         User,
         related_name='subscribed_categories'
@@ -44,17 +46,18 @@ class Post(models.Model):
         (NEWS, 'Новость'),
     )
 
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, help_text=_('author'))
     type = models.CharField(
         max_length=2,
         choices=TYPE_CHOICES,
-        default=ARTICLE
+        default=ARTICLE,
+        help_text=_('type')
     )
     created_at = models.DateTimeField(auto_now_add=True)
     categories = models.ManyToManyField(Category, through='PostCategory')
-    title = models.CharField(max_length=128)
-    text = models.TextField()
-    rating = models.IntegerField(default=0)
+    title = models.CharField(max_length=128, help_text=_('title'))
+    text = models.TextField(help_text=_('text'))
+    rating = models.IntegerField(default=0, help_text=_('rating'))
 
     def __str__(self):
         return f'{self.title}'
@@ -76,8 +79,14 @@ class Post(models.Model):
 
 
 class PostCategory(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    post = models.ForeignKey(
+        Post,
+        on_delete=models.CASCADE,
+        verbose_name=pgettext_lazy('help text for post (model PostCategory)', 'The post text'))
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.CASCADE,
+        verbose_name=pgettext_lazy('help text for category (model PostCategory)', 'This is the help text'),)
 
 
 class Comment(models.Model):
