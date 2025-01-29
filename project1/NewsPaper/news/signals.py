@@ -10,14 +10,14 @@ from .tasks import send_post_notification
 
 @receiver(post_save, sender=Category)
 def notify_managers_appointment(sender, instance, created, **kwargs):
-    if created:
-        subject = f'subject text (if)'
-    else:
-        subject = f'subject test (else)'
+    subject = 'subject text (if)' if created else 'subject text (else)'
+
+    # Предположим, у вас есть поле 'name' в модели Category
+    message = f'The category "{instance.name}" has been {"created" if created else "updated"}.'
 
     mail_managers(
         subject=subject,
-        message=instance.message,
+        message=message,
     )
 
 

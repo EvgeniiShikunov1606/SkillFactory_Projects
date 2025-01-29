@@ -40,4 +40,10 @@ for comment in comments:
 ...     print(f"Дата: {comment.created_at}, Пользователь: {comment.user.username}, Рейтинг: {comment.rating}, Текст: {comment.text}")
 Возвращен ответ: Дата: 2024-11-18 08:34:21.345426+00:00, Пользователь: user_1, Рейтинг: 1, Текст: Комментарий №1
 
+python manage.py makemigrations - сделать миграции
+python manage.py migrate - выполнить саму миграцию
+python manage.py update_translation_fields - обновить поля переводов (обязательно после миграций перевода)
+django-admin makemessages -l <код страны> - для перевода языка
+python manage.py compilemessages - применить перевод (обязательно после внесения перевода)
+
 

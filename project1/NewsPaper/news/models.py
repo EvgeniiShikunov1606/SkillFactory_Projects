@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.core.cache import cache
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 from django.utils.translation import pgettext_lazy
 
 
@@ -42,8 +42,8 @@ class Post(models.Model):
     ARTICLE = 'AR'
     NEWS = 'NW'
     TYPE_CHOICES = (
-        (ARTICLE, 'Статья'),
-        (NEWS, 'Новость'),
+        (ARTICLE, _('Статья')),
+        (NEWS, _('Новость')),
     )
 
     author = models.ForeignKey(Author, on_delete=models.CASCADE, help_text=_('author'))

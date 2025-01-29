@@ -213,6 +213,10 @@ class MyPostsList(ListView):
 
 class Index(View):
     def get(self, request):
-        string = _('Hello world')
+        models = Post.objects.all()
 
-        return HttpResponse(string)
+        context = {
+            'models': models,
+        }
+
+        return HttpResponse(render(request, 'flatpages/posts.html', context))

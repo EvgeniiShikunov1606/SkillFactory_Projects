@@ -33,6 +33,11 @@
     <form action="{% url 'post_search' %}" method="get" class="button-right">
         <input type="submit" value="{% trans 'Найти' %}" class="button" />
     </form>
+    {% for model in models %}
+    <div class="model-class">
+        {{ model.name }}
+    </div>
+    {% endfor %}
 </div>
 <h3>{% current_time '%b %d %Y' %}</h3>
 <p>{% trans "Постов на странице" %}: {{ posts|length }}</p>

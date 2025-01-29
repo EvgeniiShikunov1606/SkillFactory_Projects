@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-28 17:13+0300\n"
+"POT-Creation-Date: 2025-01-28 18:29+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,6 +35,14 @@ msgstr ""
 msgid "category name"
 msgstr ""
 
+#: .\news\models.py:45
+msgid "Статья"
+msgstr "Artículo"
+
+#: .\news\models.py:46
+msgid "Новость"
+msgstr "Noticias"
+
 #: .\news\models.py:54
 msgid "type"
 msgstr ""
@@ -57,10 +65,6 @@ msgctxt "help text for category (model PostCategory)"
 msgid "This is the help text"
 msgstr ""
 
-#: .\news\views.py:216
-msgid "Hello world"
-msgstr ""
-
 #: .\templates\email_notification.html:7
 msgid "Здравствуй, {{ user.username }}. Новая статья в твоём любимом разделе!"
 msgstr ""
@@ -81,7 +85,7 @@ msgstr "Suscribir"
 msgid "Все мои посты"
 msgstr "Todas mis publicaciones"
 
-#: .\templates\flatpages\my_posts.html:11 .\templates\flatpages\posts.html:38
+#: .\templates\flatpages\my_posts.html:11 .\templates\flatpages\posts.html:43
 #: .\templates\flatpages\search_posts.html:32
 msgid "Постов на странице"
 msgstr "Publicaciones en esta página"
@@ -91,43 +95,43 @@ msgid "Общее число моих постов"
 msgstr "Número total de mis publicaciones"
 
 #: .\templates\flatpages\my_posts.html:80 .\templates\flatpages\post.html:71
-#: .\templates\flatpages\posts.html:106
+#: .\templates\flatpages\posts.html:111
 msgid "ID"
 msgstr "ID"
 
-#: .\templates\flatpages\my_posts.html:81 .\templates\flatpages\posts.html:107
+#: .\templates\flatpages\my_posts.html:81 .\templates\flatpages\posts.html:112
 #: .\templates\flatpages\search_posts.html:14
 #: .\templates\flatpages\search_posts.html:57
 msgid "Автор"
 msgstr "Autor"
 
 #: .\templates\flatpages\my_posts.html:82 .\templates\flatpages\post.html:72
-#: .\templates\flatpages\posts.html:108
+#: .\templates\flatpages\posts.html:113
 #: .\templates\flatpages\search_posts.html:17
 #: .\templates\flatpages\search_posts.html:59
 msgid "Заголовок"
 msgstr "Titular"
 
 #: .\templates\flatpages\my_posts.html:83 .\templates\flatpages\post.html:73
-#: .\templates\flatpages\posts.html:109
+#: .\templates\flatpages\posts.html:114
 #: .\templates\flatpages\search_posts.html:60
 msgid "Дата написания"
 msgstr "Fecha de escritura"
 
 #: .\templates\flatpages\my_posts.html:84 .\templates\flatpages\post.html:74
-#: .\templates\flatpages\posts.html:110
+#: .\templates\flatpages\posts.html:115
 #: .\templates\flatpages\search_posts.html:20
 #: .\templates\flatpages\search_posts.html:61
 msgid "Содержимое"
 msgstr "Contenido"
 
 #: .\templates\flatpages\my_posts.html:85
-#: .\templates\flatpages\my_posts.html:97 .\templates\flatpages\posts.html:111
-#: .\templates\flatpages\posts.html:123
+#: .\templates\flatpages\my_posts.html:97 .\templates\flatpages\posts.html:116
+#: .\templates\flatpages\posts.html:128
 msgid "Подробнее"
 msgstr "Leer más"
 
-#: .\templates\flatpages\my_posts.html:105 .\templates\flatpages\posts.html:131
+#: .\templates\flatpages\my_posts.html:105 .\templates\flatpages\posts.html:136
 #: .\templates\flatpages\search_posts.html:78
 msgid "Постов нет!"
 msgstr "¡No hay publicaciones!"
@@ -169,7 +173,7 @@ msgstr "Colocar"
 msgid "Найти"
 msgstr "Encontrar"
 
-#: .\templates\flatpages\posts.html:39
+#: .\templates\flatpages\posts.html:44
 #: .\templates\flatpages\search_posts.html:33
 msgid "Общее число постов"
 msgstr "Número total de publicaciones"
