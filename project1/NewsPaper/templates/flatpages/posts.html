@@ -9,7 +9,9 @@
 <!-- {% block header %}{% endblock header %} --><!-- {% cache 30 content_cache_key %} -->
 {% block content %}
 <h1>{% trans "Все посты" %}</h1>
-
+<!-- <style>
+        body {background-color: {% if current_time.hour >= 19 or current_time.hour <= 7 %} darkcyan {% else %} powderblue {% endif %};}
+    </style> -->
 <div class="button-container">
     <form action="{% url 'news_create' %}" method="get" class="button-left">
         <input type="submit" value="{% trans 'Написать новость или статью' %}" class="button" />
