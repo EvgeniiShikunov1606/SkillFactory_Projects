@@ -10,7 +10,7 @@ Posts
 {% block content %}
 
 <h1>{% trans "Поиск новостей" %}</h1>
-   <form action="" method="get">
+   <form action="" method="get" class="button-left">
        <label for="author">{% trans "Автор" %}:</label>
         {{ filterset.form.author }}
 
@@ -23,10 +23,10 @@ Posts
         <label for="created_at__lte">{% trans "По дату" %}:</label>
         {{ filterset.form.created_at__lte }}
 
-    <input type="submit" value="{% trans 'Найти' %}" />
+       <input type="submit" value="{% trans 'Найти' %}" class="button" />
 </form>
-<form action="{% url 'posts_list' %}" method="get">
-    <input type="submit" value="{% trans 'Вернуться' %}" />
+<form action="{% url 'posts_list' %}" method="get"  class="button-left">
+    <input type="submit" value="{% trans 'Вернуться' %}" class="button"/>
 </form>
    <h3>{% current_time '%b %d %Y' %}</h3>
     <p>{% trans "Постов на странице" %}: {{ posts|length }}</p>
@@ -34,22 +34,66 @@ Posts
    <hr>
 
    <style>
-       table {
-           width: 100%;
-           border-collapse: collapse;
-       }
-
-       table, th, td {
-           border: 1px solid black;
-       }
-
-       th, td {
-           text-align: center;
-           padding: 10px;
-       }
-
-       th {background-color: #f2f2f2;}
-   </style>
+    body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    .button-container {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+    .button {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    .button:hover {
+        background-color: #45a049;
+    }
+    table {
+        width: 100%;
+        margin-bottom: 20px;
+        border-collapse: collapse;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    table, th, td {
+        border: 1px solid #ddd;
+    }
+    th, td {
+        padding: 12px;
+        text-align: center;
+    }
+    th {
+        background-color: #f4f4f4;
+    }
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+    }
+    .pagination a {
+        margin: 0 5px;
+        padding: 8px 16px;
+        text-decoration: none;
+        background-color: #f4f4f4;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+    .pagination a:hover {
+        background-color: #ddd;
+    }
+</style>
 
    {% if posts %}
        <table>
@@ -59,16 +103,22 @@ Posts
                <th>{% trans "Заголовок" %}</th>
                <th>{% trans "Дата написания" %}</th>
                <th>{% trans "Содержимое" %}</th>
+               <th>{% trans "Подробнее" %}</th>
                <!-- <th>Рейтинг</th> -->
            </tr>
            {% for post in posts %}
            <tr>
                {% with bad_words="дурак" %}
-                    <td>{{ post.author }}</td>
+                    <td style="background-color: #e8efff;">{{ post.author }}</td>
                     <td>{{ post.type }}</td>
                     <td>{{ post.title|censor:bad_words }}</td>
                     <td>{{ post.created_at }}</td>
                     <td>{{ post.text|truncatechars:20|censor:bad_words }}</td>
+                    <td>
+                        <form action="{% url 'post_detail' post.id %}" method="get">
+                            <input type="submit" value="{% trans 'Подробнее' %}" class="button" />
+                        </form>
+                    </td>
                 {% endwith %}
                <!-- <td>{{ post.rating }}</td>  -->
            </tr>

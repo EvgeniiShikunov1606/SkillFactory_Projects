@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView, DeleteView
 )
-from django.http import HttpResponse
+from django.http.response import HttpResponse
 from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -20,7 +20,10 @@ from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 from .tasks import send_post_notification
 from django.core.cache import cache
-from django.utils.translation import gettext as _
+from django.utils import timezone
+from django.shortcuts import redirect
+
+import pytz
 
 
 class PostsList(ListView):
@@ -31,18 +34,26 @@ class PostsList(ListView):
     paginate_by = 10
     filterset = None
 
+    # Возвращаем фильтрованный queryset
     def get_queryset(self):
         queryset = super().get_queryset()
         self.filterset = PostFilter(self.request.GET, queryset)
         return self.filterset.qs
 
+    # Настраиваем контекстные данные
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['filterset'] = self.filterset
         context['time_now'] = datetime.utcnow()
+        context['current_time'] = timezone.now()
+        context['timezones'] = pytz.common_timezones
         context['total_posts'] = Post.objects.count()
         context['categories'] = Category.objects.all()
         return context
+
+    def post(self, request, *args, **kwargs):
+        request.session['django_timezone'] = request.POST['timezone']
+        return redirect(request.path_info)
 
 
 class PostDetail(DetailView):
@@ -210,13 +221,3 @@ class MyPostsList(ListView):
         context['total_posts'] = self.get_queryset().count()
         return context
 
-
-class Index(View):
-    def get(self, request):
-        models = Post.objects.all()
-
-        context = {
-            'models': models,
-        }
-
-        return HttpResponse(render(request, 'flatpages/posts.html', context))

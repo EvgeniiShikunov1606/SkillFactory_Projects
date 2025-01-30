@@ -2,6 +2,8 @@
 {% load custom_filters %}
 {% load custom_tags %}
 {% load i18n %}
+{% load tz %}
+
 <!-- {% load cache %} -->
 {% block title %}Posts{% endblock title %}
 <!-- {% block header %}{% endblock header %} --><!-- {% cache 30 content_cache_key %} -->
@@ -11,6 +13,14 @@
 <p>{% trans "Постов на странице" %}: {{ posts|length }}</p>
 <p>{% trans "Общее число моих постов" %}: {{ total_posts }}</p>
 <hr>
+<div class="button-container">
+
+    {% for model in models %}
+    <div class="model-class">
+        {{ model.name }}
+    </div>
+    {% endfor %}
+</div>
 <style>
     body {
         font-family: Arial, sans-serif;

@@ -1,3 +1,7 @@
+import pytz
+
+from django.utils import timezone
+
 
 class DetectMobileMiddleware:
     def __init__(self, get_response):
@@ -22,3 +26,16 @@ class MobileOrFullMiddleware:
             prefix = "mobile/" if request.mobile else "full/"
             response.template_name = prefix + response.template_name
         return response
+
+
+class TimezoneMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        tzname = request.session.get('django_timezone')
+        if tzname:
+            timezone.activate(pytz.timezone(tzname))
+        else:
+            timezone.deactivate()
+        return self.get_response(request)
