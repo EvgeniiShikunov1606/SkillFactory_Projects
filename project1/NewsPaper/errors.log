@@ -1,0 +1,120 @@
+2025-01-30 10:43:33,858 ERROR C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\utils\log.py Internal Server Error: /posts/error/
+Traceback (most recent call last):
+  File "C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Евгений\PycharmProjects\project1\NewsPaper\news\views.py", line 241, in error_view
+    raise ValueError("Тестовая ошибка для проверки errors.log")
+ValueError: Тестовая ошибка для проверки errors.log
+2025-01-30 10:43:33,906 ERROR C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\core\servers\basehttp.py "GET /posts/error/ HTTP/1.1" 500 145
+2025-01-30 10:46:42,712 ERROR C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\utils\log.py Internal Server Error: /posts/error/
+Traceback (most recent call last):
+  File "C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Евгений\PycharmProjects\project1\NewsPaper\news\views.py", line 241, in error_view
+    raise ValueError("Тестовая ошибка для проверки errors.log")
+ValueError: Тестовая ошибка для проверки errors.log
+2025-01-30 10:46:42,747 ERROR C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\core\servers\basehttp.py "GET /posts/error/ HTTP/1.1" 500 145
+2025-01-30 10:47:35,463 ERROR C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\utils\log.py Internal Server Error: /posts/error/
+Traceback (most recent call last):
+  File "C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Евгений\PycharmProjects\project1\NewsPaper\news\views.py", line 241, in error_view
+    raise ValueError("Тестовая ошибка для проверки errors.log")
+ValueError: Тестовая ошибка для проверки errors.log
+2025-01-30 10:47:35,494 ERROR C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\core\servers\basehttp.py "GET /posts/error/ HTTP/1.1" 500 145
+2025-01-30 10:48:22,637 ERROR C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\utils\log.py Internal Server Error: /posts/error/
+Traceback (most recent call last):
+  File "C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Евгений\PycharmProjects\project1\NewsPaper\news\views.py", line 241, in error_view
+    raise ValueError("Тестовая ошибка для проверки errors.log")
+ValueError: Тестовая ошибка для проверки errors.log
+2025-01-30 10:48:25,407 ERROR C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\core\servers\basehttp.py "GET /posts/error/ HTTP/1.1" 500 145
+2025-01-30 10:49:50,744 ERROR C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\utils\log.py Internal Server Error: /posts/error/
+Traceback (most recent call last):
+  File "C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Евгений\PycharmProjects\project1\NewsPaper\news\views.py", line 241, in error_view
+    raise ValueError("Тестовая ошибка для проверки errors.log")
+ValueError: Тестовая ошибка для проверки errors.log
+2025-01-30 10:49:52,472 ERROR C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\core\servers\basehttp.py "GET /posts/error/ HTTP/1.1" 500 145
+2025-01-30 10:50:15,854 ERROR C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\utils\log.py Internal Server Error: /posts/error/
+Traceback (most recent call last):
+  File "C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Евгений\PycharmProjects\project1\NewsPaper\news\views.py", line 241, in error_view
+    raise ValueError("Тестовая ошибка для проверки errors.log")
+ValueError: Тестовая ошибка для проверки errors.log
+2025-01-30 10:50:17,236 ERROR C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\core\servers\basehttp.py "GET /posts/error/ HTTP/1.1" 500 145
+2025-01-30 10:53:35,024 ERROR C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\utils\log.py Internal Server Error: /posts/error/
+Traceback (most recent call last):
+  File "C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Евгений\PycharmProjects\project1\NewsPaper\news\views.py", line 241, in error_view
+    raise ValueError("Тестовая ошибка для проверки errors.log")
+ValueError: Тестовая ошибка для проверки errors.log
+2025-01-30 10:53:36,734 ERROR C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\core\servers\basehttp.py "GET /posts/error/ HTTP/1.1" 500 145
+2025-01-30 10:54:22,708 ERROR C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\utils\log.py Internal Server Error: /posts/error/
+Traceback (most recent call last):
+  File "C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Евгений\PycharmProjects\project1\NewsPaper\news\views.py", line 241, in error_view
+    raise ValueError("Тестовая ошибка для проверки errors.log")
+ValueError: Тестовая ошибка для проверки errors.log
+2025-01-30 10:54:22,740 ERROR C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\core\servers\basehttp.py "GET /posts/error/ HTTP/1.1" 500 145
+2025-01-30 10:54:22,906 ERROR C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\utils\log.py Internal Server Error: /posts/error/
+Traceback (most recent call last):
+  File "C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Евгений\PycharmProjects\project1\NewsPaper\news\views.py", line 241, in error_view
+    raise ValueError("Тестовая ошибка для проверки errors.log")
+ValueError: Тестовая ошибка для проверки errors.log
+2025-01-30 10:54:22,970 ERROR C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\core\servers\basehttp.py "GET /posts/error/ HTTP/1.1" 500 145
+2025-01-30 10:54:34,189 ERROR C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\utils\log.py Internal Server Error: /posts/error/
+Traceback (most recent call last):
+  File "C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Евгений\PycharmProjects\project1\NewsPaper\news\views.py", line 241, in error_view
+    raise ValueError("Тестовая ошибка для проверки errors.log")
+ValueError: Тестовая ошибка для проверки errors.log
+2025-01-30 10:54:34,212 ERROR C:\Users\Евгений\PycharmProjects\project1\venv\Lib\site-packages\django\core\servers\basehttp.py "GET /posts/error/ HTTP/1.1" 500 145
