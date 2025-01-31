@@ -75,8 +75,8 @@
         <th>{% trans "ID" %}</th>
         <th>{% trans "Изображение" %}</th>
         <th>{% trans "Заголовок" %}</th>
-        <th>{% trans "Дата написания" %}</th>
         <th>{% trans "Содержимое" %}</th>
+        <th>{% trans "Дата написания" %}</th>
         <th>{% trans "Управление" %}</th>
     </tr>
     <tr>
@@ -90,8 +90,8 @@
             {% endif %}
         </td>
         <td>{{ post.title|censor:bad_words }}</td>
+                <td>{{ post.text|censor:bad_words }}</td>
         <td>{{ post.created_at }}</td>
-        <td>{{ post.text|censor:bad_words }}</td>
         <td>
             <form action="{% url 'post_delete' post.id %}" method="get" style="display:inline;">
                 <input type="submit" value='{% trans "Удалить" %}' class="button button-delete" />
