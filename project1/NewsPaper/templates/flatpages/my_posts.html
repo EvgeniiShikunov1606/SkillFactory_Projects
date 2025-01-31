@@ -82,12 +82,17 @@
     .pagination a:hover {
         background-color: #ddd;
     }
+    .img-small {
+    max-width: 150px;
+    height: auto;
+    }
 </style>
 
 {% if posts %}
     <table>
         <tr>
             <th>{% trans "ID" %}</th>
+            <th>{% trans "Изображение" %}</th>
             <th>{% trans "Автор" %}</th>
             <th>{% trans "Заголовок" %}</th>
             <th>{% trans "Дата написания" %}</th>
@@ -98,6 +103,13 @@
         <tr>
             {% with bad_words="дурак" %}
             <td style="background-color: #e8efff;">{{ post.id }}</td>
+            <td>
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" alt="Изображение поста" class="img-small">
+                {% else %}
+                    <p>Нет изображения</p>
+                {% endif %}
+            </td>
             <td>{{ post.author }}</td>
             <td>{{ post.title|censor:bad_words }}</td>
             <td>{{ post.created_at }}</td>

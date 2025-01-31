@@ -6,7 +6,7 @@ from .models import Post, Category
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'text', 'type', 'categories']
+        fields = ['title', 'text', 'type', 'categories', 'image']
 
     def clean(self):
         cleaned_data = super().clean()
@@ -32,3 +32,9 @@ class SubscriptionForm(forms.ModelForm):
     class Meta:
         model = Category
         fields = []
+
+
+class PostPhoto(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['image']

@@ -46,6 +46,7 @@ class Post(models.Model):
         (NEWS, _('Новость')),
     )
 
+    image = models.ImageField(upload_to='images/', null=True, blank=True, help_text=_('image'))
     author = models.ForeignKey(Author, on_delete=models.CASCADE, help_text=_('author'))
     type = models.CharField(
         max_length=2,

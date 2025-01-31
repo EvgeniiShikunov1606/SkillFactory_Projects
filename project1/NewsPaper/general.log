@@ -44,3 +44,40 @@
 2025-01-30 11:07:41,249 INFO autoreload Watching for file changes with StatReloader
 2025-01-30 11:18:35,782 INFO autoreload Watching for file changes with StatReloader
 2025-01-30 11:23:25,606 INFO autoreload Watching for file changes with StatReloader
+2025-01-30 13:37:35,827 INFO autoreload Watching for file changes with StatReloader
+2025-01-30 13:41:18,477 INFO autoreload Watching for file changes with StatReloader
+2025-01-31 12:22:20,069 INFO autoreload Watching for file changes with StatReloader
+2025-01-31 12:22:35,635 INFO autoreload C:\Users\Евгений\PycharmProjects\project1\NewsPaper\news\urls.py changed, reloading.
+2025-01-31 12:22:37,054 INFO autoreload Watching for file changes with StatReloader
+2025-01-31 12:23:05,754 INFO autoreload C:\Users\Евгений\PycharmProjects\project1\NewsPaper\news\urls.py changed, reloading.
+2025-01-31 12:23:06,991 INFO autoreload Watching for file changes with StatReloader
+2025-01-31 12:25:19,988 INFO autoreload Watching for file changes with StatReloader
+2025-01-31 12:27:15,418 INFO autoreload C:\Users\Евгений\PycharmProjects\project1\NewsPaper\news\views.py changed, reloading.
+2025-01-31 12:27:16,953 INFO autoreload Watching for file changes with StatReloader
+2025-01-31 12:27:28,546 INFO autoreload C:\Users\Евгений\PycharmProjects\project1\NewsPaper\news\views.py changed, reloading.
+2025-01-31 12:27:29,795 INFO autoreload Watching for file changes with StatReloader
+2025-01-31 12:27:53,328 INFO autoreload C:\Users\Евгений\PycharmProjects\project1\NewsPaper\news\urls.py changed, reloading.
+2025-01-31 12:27:54,607 INFO autoreload Watching for file changes with StatReloader
+2025-01-31 12:27:59,729 INFO autoreload C:\Users\Евгений\PycharmProjects\project1\NewsPaper\news\urls.py changed, reloading.
+2025-01-31 12:28:00,955 INFO autoreload Watching for file changes with StatReloader
+2025-01-31 12:29:48,675 INFO autoreload Watching for file changes with StatReloader
+2025-01-31 12:33:21,800 INFO autoreload C:\Users\Евгений\PycharmProjects\project1\NewsPaper\news\forms.py changed, reloading.
+2025-01-31 12:33:23,067 INFO autoreload Watching for file changes with StatReloader
+2025-01-31 12:35:58,170 INFO autoreload Watching for file changes with StatReloader
+2025-01-31 12:37:06,592 INFO autoreload C:\Users\Евгений\PycharmProjects\project1\NewsPaper\news\views.py changed, reloading.
+2025-01-31 12:37:07,880 INFO autoreload Watching for file changes with StatReloader
+2025-01-31 12:37:44,028 INFO autoreload Watching for file changes with StatReloader
+2025-01-31 12:39:23,945 INFO autoreload C:\Users\Евгений\PycharmProjects\project1\NewsPaper\news\urls.py changed, reloading.
+2025-01-31 12:39:25,241 INFO autoreload Watching for file changes with StatReloader
+2025-01-31 12:39:40,282 INFO autoreload C:\Users\Евгений\PycharmProjects\project1\NewsPaper\NewsPaper\settings.py changed, reloading.
+2025-01-31 12:39:41,592 INFO autoreload Watching for file changes with StatReloader
+2025-01-31 12:40:20,694 INFO autoreload Watching for file changes with StatReloader
+2025-01-31 12:43:27,301 INFO autoreload C:\Users\Евгений\PycharmProjects\project1\NewsPaper\news\views.py changed, reloading.
+2025-01-31 12:43:31,271 INFO autoreload Watching for file changes with StatReloader
+2025-01-31 12:49:12,405 INFO autoreload Watching for file changes with StatReloader
+2025-01-31 12:57:17,245 INFO autoreload C:\Users\Евгений\PycharmProjects\project1\NewsPaper\news\urls.py changed, reloading.
+2025-01-31 12:57:18,694 INFO autoreload Watching for file changes with StatReloader
+2025-01-31 12:57:23,514 INFO autoreload Watching for file changes with StatReloader
+2025-01-31 13:02:30,047 INFO autoreload Watching for file changes with StatReloader
+2025-01-31 13:03:51,544 INFO autoreload Watching for file changes with StatReloader
+2025-01-31 13:07:24,460 INFO autoreload Watching for file changes with StatReloader

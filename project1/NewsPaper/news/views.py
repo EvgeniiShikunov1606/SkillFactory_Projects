@@ -9,7 +9,7 @@ from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .filters import PostFilter
-from .forms import PostForm
+from .forms import PostForm, PostPhoto
 from .models import Post, Author, Category
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.views.generic.edit import CreateView
@@ -21,7 +21,7 @@ from django.contrib import messages
 from .tasks import send_post_notification
 from django.core.cache import cache
 from django.utils import timezone
-from django.shortcuts import redirect
+
 
 import pytz
 
@@ -82,11 +82,11 @@ class CategoryDetailView(DetailView):
 
 
 class PostCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
-    permission_required = 'news.add_post'
     form_class = PostForm
     model = Post
     template_name = 'post_create.html'
     success_url = reverse_lazy('posts_list')
+    permission_required = 'news.add_post'
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.groups.filter(name='authors').exists():
@@ -97,6 +97,7 @@ class PostCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
         user = self.request.user
         author, created = Author.objects.get_or_create(user=user)
         form.instance.author = author
+        form.instance.image = self.request.FILES.get('image')  # Добавлено
         return super().form_valid(form)
 
     def send_email_notification(self):
@@ -122,6 +123,20 @@ class PostCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
         )
         msg.attach_alternative(html_content, "text/html")
         msg.send()
+
+    def photo_upload(self):
+        if self.method == 'POST':
+            form = PostForm(self.POST, self.FILES)
+            if form.is_valid():
+                form.save()
+                return redirect('photo_list')
+        else:
+            form = PostForm()
+        return render(self, 'post_create.html', {'form': form})
+
+    def photo_list(self):
+        photos = Post.objects.all()
+        return render(self, 'post_create.html', {'photos': photos})
 
 
 class PostUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
