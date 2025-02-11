@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Мои отклики</title>
+</head>
+<body>
+<h1>Отклики на мои объявления</h1>
+<form method="get">
+    <label for="ad_id">Фильтр по объявлению:</label>
+    <select name="ad_id" id="ad_id" onchange="this.form.submit()">
+        <option value="">Все объявления</option>
+            {% for ad in ads %}
+                <option value="{{ ad.id }}" {% if selected_ad_id == ad.id|stringformat:"s" %}selected{% endif %}>
+                    {{ ad.title }}
+                </option>
+            {% endfor %}
+        </select>
+</form>
+    <ul>
+        {% for response in responses %}
+            <li>
+                <strong>{{ response.author.email }}</strong>:
+                {{ response.text }}
+                {% if response.ad and not selected_ad_id %}
+                <em>({{ response.ad.title }})</em>
+                {% endif %}
+                {% if not response.accepted %}
+                    <form method="post" action="{% url 'accept_response' response.id %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit">Принять</button>
+                    </form>
+                {% endif %}
+                <form method="post" action="{% url 'delete_response' response.id %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Удалить</button>
+                </form>
+            </li>
+        {% empty %}
+            <p>Отклики на ваши объявления отсутствуют</p>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Объявления</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #e9ecef;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #ffffff;
+            border: 2px solid #17a2b8;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            transition: transform 0.2s;
+        }
+        li:hover {
+            transform: scale(1.02);
+        }
+        img {
+            border-right: 2px solid #17a2b8;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+        .ad-content {
+            padding: 15px;
+            flex: 1;
+        }
+        a {
+            color: #17a2b8;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        a:hover {
+            color: #155d72;
+        }
+        .category {
+            font-size: 0.9em;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+<h1>Список объявлений</h1>
+    <ul>
+        {% for ad in ads %}
+            <li>
+                {% if ad.image %}
+                    <img src="{{ ad.image.url }}" alt="Изображение объявления">
+                {% endif %}
+                <div class="ad-content"><a href="{% url 'ad_detail' ad.id %}">{{ ad.title }}</a>
+                    <p>{{ ad.content }}</p>
+                    <p class="category">Категория: {{ ad.category }}<br>
+                        Количество откликов: {{ ad.responses.count }}<br><br>
+                        {{ ad.created_at }}</p>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
