@@ -21,7 +21,6 @@ from django.views.generic import (
 )
 from django.urls import reverse_lazy
 from django.core.exceptions import PermissionDenied
-from django.template.loader import render_to_string
 
 
 class AdViewSet(viewsets.ModelViewSet):
@@ -79,7 +78,6 @@ class ResponseViewSet(viewsets.ModelViewSet):
         if response.ad.author != user and response.author != user:
             return Response({"error": "Вы не можете удалить этот отклик"}, status=403)
 
-        # Определяем текст письма
         if user == response.author:
             subject = "Ваш отклик удалён"
             message = f"Вы удалили свой отклик на объявление '{response.ad.title}'."
@@ -127,7 +125,7 @@ def ad_detail(request, ad_id):
 
 @login_required
 def response_list(request):
-    ads = Ad.objects.filter(author=request.user)  # Объявления текущего пользователя
+    ads = Ad.objects.filter(author=request.user)
     selected_ad_id = request.GET.get("ad_id")
 
     if selected_ad_id:
