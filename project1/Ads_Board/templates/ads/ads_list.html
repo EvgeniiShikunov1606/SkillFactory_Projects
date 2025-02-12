@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <title>Объявления</title>
@@ -60,6 +61,10 @@
         .button {
             cursor: pointer;
         }
+        .ad-image {
+            width: auto;
+            height: 150px;
+        }
     </style>
 </head>
 <body>
@@ -70,26 +75,28 @@
     <form action="{% url 'response_list' %}" method="get" class="button-left">
         <input type="submit" value="Отклики на мои объявления" class="button" />
     </form>
+    <a href="/accounts/" class="button">Аккаунт</a>
 </div>
+
 <h1>Список объявлений</h1>
     <ul>
         {% for ad in ads %}
             <li>
                 {% if ad.image1 %}
-                    <img src="{{ ad.image1.url }}" alt="Первое изображение">
+                    <img src="{{ ad.image1.url }}" alt="Первое изображение"  class="ad-image">
                 {% endif %}
                 {% if ad.image2 %}
-                    <img src="{{ ad.image2.url }}" alt="Второе изображение">
+                    <img src="{{ ad.image2.url }}" alt="Второе изображение"  class="ad-image">
                 {% endif %}
                 {% if ad.video1 %}
-                    <video width=auto height="100" controls>
+                    <video width=auto height="150" controls>
                         <source src="{{ ad.video1.url }}" type="video/mp4">
                         <source src="{{ ad.video1.url }}" type="video/MOV">
                         <source src="{{ ad.video1.url }}" type="video/webm">
                     </video>
                 {% endif %}
                 {% if ad.video2 %}
-                    <video width=auto height="100" controls>
+                    <video width=auto height="150" controls>
                         <source src="{{ ad.video2.url }}" type="video/mp4">
                         <source src="{{ ad.video2.url }}" type="video/MOV">
                         <source src="{{ ad.video2.url }}" type="video/webm">

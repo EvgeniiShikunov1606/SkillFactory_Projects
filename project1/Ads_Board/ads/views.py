@@ -203,7 +203,7 @@ def send_ads_letter(request):
 class AdCreate(LoginRequiredMixin, CreateView):
     form_class = AdForm
     model = Ad
-    template_name = 'ads/ad_form.html'
+    template_name = 'ads/ad_create.html'
     success_url = reverse_lazy('ads_list')
 
     def form_valid(self, form):
@@ -219,10 +219,35 @@ class AdCreate(LoginRequiredMixin, CreateView):
                 return redirect('photo_list')
         else:
             form = AdForm()
-        return render(self, 'ads/ad_form.html', {'form': form})
+        return render(self, 'ads/ad_create.html', {'form': form})
 
     def photo_list(self):
         photos = Ad.objects.all()
-        return render(self, 'ads/ad_form.html', {'photos': photos})
+        return render(self, 'ads/ad_create.html', {'photos': photos})
+
+
+class AdUpdate(UpdateView):
+    form_class = AdForm
+    model = Ad
+    template_name = 'ads/ad_update.html'
+    success_url = reverse_lazy('ads_list')
+
+    def dispatch(self, request, *args, **kwargs):
+        ad = self.get_object()
+        if ad.author != self.request.user:
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
+
+
+class AdDelete(DeleteView):
+    model = Ad
+    template_name = 'ads/ad_delete.html'
+    success_url = reverse_lazy('ads_list')
+
+    def dispatch(self, request, *args, **kwargs):
+        ad = self.get_object()
+        if ad.author != self.request.user:
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
 
 

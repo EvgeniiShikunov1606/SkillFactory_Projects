@@ -60,6 +60,14 @@
                     </video>
                 {% endif %}
 <p>{{ ad.content }}</p>
+<div>
+    <form action="{% url 'ad_update' ad.id %}" method="get" style="display:inline;">
+        <input type="submit" value="Изменить" class="button button-delete" />
+    </form>
+    <form action="{% url 'ad_delete' ad.id %}" method="get" style="display:inline;">
+        <input type="submit" value="Удалить" class="button button-delete" />
+    </form>
+</div>
 <h3>Отклики:</h3>
     <ul>
         {% for response in responses %}
@@ -79,5 +87,6 @@
     {% else %}
         <p>Войдите, чтобы оставить отклик.</p>
     {% endif %}
+    <a href="{% url 'ads_list' %}" class="button button-left">Назад</a>
 </body>
 </html>

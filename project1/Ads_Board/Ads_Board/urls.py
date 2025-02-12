@@ -18,25 +18,27 @@ from django.contrib import admin
 from django.urls import path, include
 from ads.views import (AdViewSet, ResponseViewSet, UserResponsesListView,
                         ads_list, ad_detail, response_list, accept_response, delete_response,
-                        send_ads_letter, AdCreate)
+                        send_ads_letter, AdCreate, AdDelete, AdUpdate)
 from django.views.generic import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('accounts/', include('allauth.urls')),
-    path('api/', include('ads.urls')),
+    path("admin/", admin.site.urls),
+    path("accounts/", include('allauth.urls')),
+    path("api/", include('ads.urls')),
     path("", ads_list, name="ads_list"),
     path("ad/<int:ad_id>/", ad_detail, name="ad_detail"),
+    path("ad/<int:pk>/delete/", AdDelete.as_view(), name='ad_delete'),
+    path("ad/<int:pk>/update/", AdUpdate.as_view(), name='ad_update'),
     path("responses/", response_list, name="response_list"),
     path("response/<int:response_id>/accept/", accept_response, name="accept_response"),
     path("response/<int:response_id>/delete/", delete_response, name="delete_response"),
     path("ads_letter/", send_ads_letter, name="send_ads_letter"),
     path("ads_letter/success/", TemplateView.as_view(template_name="ads/ads_letter_success.html"),
          name="ads_letter_success"),
-    path('add_ad/', AdCreate.as_view(), name='ad_form'),
+    path("add_ad/", AdCreate.as_view(), name='ad_form'),
 ]
 
 if settings.DEBUG:

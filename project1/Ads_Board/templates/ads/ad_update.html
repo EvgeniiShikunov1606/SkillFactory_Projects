@@ -1,0 +1,51 @@
+<style>
+    form {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+    form input[type="text"],
+    form input[type="email"],
+    form input[type="file"],
+    form textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    .button {
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-align: center;
+    }
+    .button:hover {
+        background-color: #45a049;
+    }
+    .button-container {
+        display: flex;
+        gap: 10px;
+    }
+    .button-left {
+        background-color: #f44336;
+    }
+    .button-left:hover {
+        background-color: #d7372f;
+    }
+</style><form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="button-container">
+        <button type="submit" class="button">Изменить объявление</button>
+        <a href="{% url 'ad_detail' ad.id %}" class="button button-left">Назад</a>
+    </div>
+</form>
