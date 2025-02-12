@@ -148,8 +148,14 @@ EMAIL_HOST_USER = "evgeniishikunov1998@ya.ru"
 EMAIL_HOST_PASSWORD = 'imhhtexgtapbewlg'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+FILE_UPLOAD_HANDLERS = [
+    "django.core.files.uploadhandler.TemporaryFileUploadHandler",
+]
+
+DATA_UPLOAD_MAX_MEMORY_SIZE = 52428800
+FILE_UPLOAD_MAX_MEMORY_SIZE = 52428800
 
 

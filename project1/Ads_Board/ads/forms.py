@@ -11,4 +11,4 @@ class AdsLetterForm(forms.ModelForm):
 class AdForm(forms.ModelForm):
     class Meta:
         model = Ad
-        fields = ["title", "category", "image", "content"]
+        fields = ["title", "category", "image1", "image2", "video1", "video2", "content"]

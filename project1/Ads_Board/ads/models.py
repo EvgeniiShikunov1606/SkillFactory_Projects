@@ -17,7 +17,10 @@ CATEGORIES = [
 
 class Ad(models.Model):
     title = models.CharField(max_length=255)
-    image = models.ImageField(upload_to="ads_images/", blank=True, null=True)
+    image1 = models.ImageField(upload_to="ads_images/", blank=True, null=True)
+    image2 = models.ImageField(upload_to="ads_images/", blank=True, null=True)
+    video1 = models.FileField(upload_to="ads_videos/", blank=True, null=True)
+    video2 = models.FileField(upload_to="ads_videos/", blank=True, null=True)
     content = models.TextField()
     category = models.CharField(max_length=20, choices=CATEGORIES)
     author = models.ForeignKey(User, on_delete=models.CASCADE)

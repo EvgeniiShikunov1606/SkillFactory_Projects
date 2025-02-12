@@ -50,19 +50,55 @@
             font-size: 0.9em;
             color: #6c757d;
         }
+        .button-container {
+            display: flex;
+            justify-content: flex-start;
+        }
+        .button-left {
+            margin: 0 5px;
+        }
+        .button {
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
+<div class="button-container">
+    <form action="{% url 'ad_form' %}" method="get" class="button-left">
+        <input type="submit" value="Создать объявление" class="button" />
+    </form>
+    <form action="{% url 'response_list' %}" method="get" class="button-left">
+        <input type="submit" value="Отклики на мои объявления" class="button" />
+    </form>
+</div>
 <h1>Список объявлений</h1>
     <ul>
         {% for ad in ads %}
             <li>
-                {% if ad.image %}
-                    <img src="{{ ad.image.url }}" alt="Изображение объявления">
+                {% if ad.image1 %}
+                    <img src="{{ ad.image1.url }}" alt="Первое изображение">
+                {% endif %}
+                {% if ad.image2 %}
+                    <img src="{{ ad.image2.url }}" alt="Второе изображение">
+                {% endif %}
+                {% if ad.video1 %}
+                    <video width=auto height="100" controls>
+                        <source src="{{ ad.video1.url }}" type="video/mp4">
+                        <source src="{{ ad.video1.url }}" type="video/MOV">
+                        <source src="{{ ad.video1.url }}" type="video/webm">
+                    </video>
+                {% endif %}
+                {% if ad.video2 %}
+                    <video width=auto height="100" controls>
+                        <source src="{{ ad.video2.url }}" type="video/mp4">
+                        <source src="{{ ad.video2.url }}" type="video/MOV">
+                        <source src="{{ ad.video2.url }}" type="video/webm">
+                    </video>
                 {% endif %}
                 <div class="ad-content"><a href="{% url 'ad_detail' ad.id %}">{{ ad.title }}</a>
                     <p>{{ ad.content }}</p>
-                    <p class="category">Категория: {{ ad.category }}<br>
+                    <p class="category">Автор: {{ ad.author }}<br>
+                        Категория: {{ ad.category }}<br>
                         Количество откликов: {{ ad.responses.count }}<br><br>
                         {{ ad.created_at }}</p>
                 </div>

@@ -27,11 +27,39 @@
         button:hover {
             background-color: #138496;
         }
+        .ad-image {
+            width: auto;
+            height: 200px;
+        }
+        .ad-video {
+            width: auto;
+            height: 200px;
+        }
     </style>
 </head>
 <body>
 <h1>{{ ad.title }}</h1>
-<p>{{ ad.text }}</p>
+{% if ad.image1 %}
+    <img src="{{ ad.image1.url }}" alt="Первое изображение" class="ad-image">
+{% endif %}
+{% if ad.image2 %}
+    <img src="{{ ad.image2.url }}" alt="Второе изображение" class="ad-image">
+{% endif %}
+                {% if ad.video1 %}
+                    <video width=auto height="200" controls>
+                        <source src="{{ ad.video1.url }}" type="video/mp4">
+                        <source src="{{ ad.video1.url }}" type="video/MOV">
+                        <source src="{{ ad.video1.url }}" type="video/webm">
+                    </video>
+                {% endif %}
+                {% if ad.video2 %}
+                    <video width=auto height="200" controls>
+                        <source src="{{ ad.video2.url }}" type="video/mp4">
+                        <source src="{{ ad.video2.url }}" type="video/MOV">
+                        <source src="{{ ad.video2.url }}" type="video/webm">
+                    </video>
+                {% endif %}
+<p>{{ ad.content }}</p>
 <h3>Отклики:</h3>
     <ul>
         {% for response in responses %}
