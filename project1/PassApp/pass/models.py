@@ -26,7 +26,7 @@ class Pass(models.Model):
     connect = models.TextField(blank=True, null=True)
 
     add_time = models.DateTimeField()
-    user = models.ForeignKey(User, related_name='pass', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='passes', on_delete=models.CASCADE)
     latitude = models.FloatField()
     longitude = models.FloatField()
     height = models.PositiveIntegerField()
@@ -40,3 +40,12 @@ class Pass(models.Model):
 
     def __str__(self):
         return f"{self.title} ({self.status})"
+
+
+class PassImage(models.Model):
+    pass_obj = models.ForeignKey(Pass, related_name='images', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='media/pass_images/')
+    title = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f"{self.title} ({self.pass_obj.title})"
