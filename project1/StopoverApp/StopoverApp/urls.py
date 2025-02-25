@@ -17,13 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from stopover.views import StopoverViewSet
+from stopover.views import StopoverViewSet, create_stopover
 
 
 router = DefaultRouter()
-router.register(r'stopover', StopoverViewSet, basename='stopover')
+router.register(r'stopover-list', StopoverViewSet, basename='stopover-list')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path('create-stopover/', create_stopover, name='create_stopover'),
 ]
