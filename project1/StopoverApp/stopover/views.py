@@ -55,3 +55,22 @@ def get_stopover(request, id):
             'message': f'Ошибка подключения: {str(e)}',
         }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+
+@api_view(['GET'])
+def get_stopover_by_email(request):
+    email = request.GET.get('user__email')
+    try:
+        stopovers = Stopover.objects.filter(user__email=email)
+        serializer = StopoverSerializer(stopovers, many=True)
+        return Response(serializer.data)
+    except Stopover.DoesNotExist:
+        return Response({
+            'status': 404,
+            'message': 'Запись не найдена',
+        }, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({
+            'status': 500,
+            'message': f'Ошибка подключения: {str(e)}',
+        }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
