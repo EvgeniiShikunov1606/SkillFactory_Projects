@@ -74,3 +74,41 @@ def get_stopover_by_email(request):
             'message': f'Ошибка подключения: {str(e)}',
         }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+
+@api_view(['PATCH'])
+def patch_stopover(request, id):
+    try:
+        stopover = Stopover.objects.get(id=id)
+        if stopover.status != 'new':
+            return Response({
+                'state': 0,
+                'message': "Запись не в статусе 'new'.",
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+        serializer = StopoverSerializer(stopover, data=request.data, partial=True)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response({
+                'state': 1,
+                'message': f'Запись id: {id} успешно изменена'
+            }, status=status.HTTP_200_OK)
+        else:
+            return Response({
+                'state': 0,
+                'message': 'Ошибка валидации данных.',
+                'errors': serializer.errors
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+    except Stopover.DoesNotExist:
+        return Response({
+            'state': 0,
+            'message': 'Запись не найдена.',
+        }, status=status.HTTP_404_NOT_FOUND)
+
+    except Exception as e:
+        return Response({
+            'state': 0,
+            'message': f'Ошибка: {str(e)}',
+        }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+

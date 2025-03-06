@@ -17,7 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from stopover.views import StopoverViewSet, create_stopover, get_stopover, get_stopover_by_email
+from stopover.views import (StopoverViewSet, create_stopover, get_stopover,
+                            get_stopover_by_email, patch_stopover)
 
 
 router = DefaultRouter()
@@ -29,4 +30,5 @@ urlpatterns = [
     path('create-stopover/', create_stopover, name='create_stopover'),
     path('get-stopover/<int:id>', get_stopover, name='get_stopover'),
     path('get-stopover/', get_stopover_by_email, name='get_stopover_by_email'),
+    path('patch-stopover/<int:id>', patch_stopover, name='patch_stopover')
 ]
