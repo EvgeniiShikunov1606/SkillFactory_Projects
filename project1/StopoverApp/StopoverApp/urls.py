@@ -19,10 +19,23 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from stopover.views import (StopoverViewSet, create_stopover, get_stopover,
                             get_stopover_by_email, patch_stopover)
+from rest_framework import permissions
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
 
 
 router = DefaultRouter()
 router.register(r'stopover-list', StopoverViewSet, basename='stopover-list')
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title="REST API",
+        default_version='v1',
+        description="API documentation for StopoverApp",
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,5 +43,6 @@ urlpatterns = [
     path('create-stopover/', create_stopover, name='create_stopover'),
     path('get-stopover/<int:id>', get_stopover, name='get_stopover'),
     path('get-stopover/', get_stopover_by_email, name='get_stopover_by_email'),
-    path('patch-stopover/<int:id>', patch_stopover, name='patch_stopover')
+    path('patch-stopover/<int:id>', patch_stopover, name='patch_stopover'),
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 ]
