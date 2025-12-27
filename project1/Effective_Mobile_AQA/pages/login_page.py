@@ -1,7 +1,5 @@
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
 
 class LoginPage(BasePage):
@@ -13,19 +11,15 @@ class LoginPage(BasePage):
     ERROR_MESSAGE = (By.CSS_SELECTOR, '[data-test="error"]')
 
     def open(self):
-        self.driver.get(self.URL)
+        self.open_url(self.URL)
 
     def login(self, username="", password=""):
-        self.driver.find_element(*self.USERNAME).clear()
-        self.driver.find_element(*self.USERNAME).send_keys(username)
-        self.driver.find_element(*self.PASSWORD).clear()
-        self.driver.find_element(*self.PASSWORD).send_keys(password)
-        self.driver.find_element(*self.LOGIN_BUTTON).click()
+        self.type(self.USERNAME, username)
+        self.type(self.PASSWORD, password)
+        self.click(self.LOGIN_BUTTON)
 
     def is_error_displayed(self):
-        return WebDriverWait(self.driver, 5).until(
-            EC.visibility_of_element_located(self.ERROR_MESSAGE)
-        ).is_displayed()
+        return self.is_visible(self.ERROR_MESSAGE)
 
     def get_error_text(self):
-        return self.driver.find_element(*self.ERROR_MESSAGE).text
+        return self.get_text(self.ERROR_MESSAGE)
